@@ -64,10 +64,10 @@ app.put('/users/edit', isAuth, editUser);
  * ##########################
  */
 
-app.delete('/works/delete/:idLink', isAuth, deleteWork);
+app.delete('/works/delete/:idWork', isAuth, deleteWork);
 app.get('/works', getWorks);
 app.post('/works/new', isAuth, newWorks);
-app.put('/works/:idLink', isAuth, editWorks);
+app.put('/works/:idWork', isAuth, editWorks);
 
 //////////////////////
 

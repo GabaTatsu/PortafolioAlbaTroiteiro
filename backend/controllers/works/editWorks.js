@@ -1,5 +1,5 @@
 const getDB = require('../../db/getDB');
-const { generateError } = require('../../helpers');
+const { generateError, deletePhoto, savePhoto } = require('../../helpers');
 
 const editWorks = async (req, res, next) => {
     let connection;
@@ -7,39 +7,43 @@ const editWorks = async (req, res, next) => {
     try {
         connection = await getDB();
 
-        const { idLink } = req.params;
+        const { idWork } = req.params;
 
-        const idUser = req.userAuth.id;
+        const { title, description, category } = req.body;
+        const imagen = req.files?.image;
 
-        const { title, description, link } = req.body;
-
-        if (!(title || description || link)) {
-            throw generateError('No se ha introducido ningún dato', 400);
+        if (!(title || description || category || imagen)) {
+            throw generateError('No se ha modificado ningún dato', 400);
         }
 
-        const [links] = await connection.query(
-            `SELECT title, description, link, idUser FROM link WHERE id = ?`,
-            [idLink]
+        const [works] = await connection.query(
+            `SELECT title, description, image, category FROM work WHERE id = ?`,
+            [idWork]
         );
 
-        if (links.length < 1) {
-            throw generateError('No existe el enlace seleccionado', 404);
+        if (works.length < 1) {
+            throw generateError('No existe el trabajo seleccionado', 404);
         }
 
-        if (idUser !== links[0].idUser) {
-            throw generateError(
-                'No eres el propietario del enlace a editar',
-                404
-            );
+        let imageName;
+        if (imagen) {
+            if (works[0].image) {
+                await deletePhoto(works[0].image);
+            }
+            imageName = await savePhoto(imagen);
+            await connection.query(`UPDATE work SET image = ? WHERE id = ?`, [
+                imageName,
+                idWork,
+            ]);
         }
 
         await connection.query(
-            `UPDATE link SET title = ?, description = ?, link = ? WHERE id = ?`,
+            `UPDATE work SET title = ?, description = ?, category = ? WHERE id = ?`,
             [
-                title || links[0].title,
-                description || links[0].description,
-                link || links[0].link,
-                idLink,
+                title || works[0].title,
+                description || works[0].description,
+                category || works[0].category,
+                idWork,
             ]
         );
 

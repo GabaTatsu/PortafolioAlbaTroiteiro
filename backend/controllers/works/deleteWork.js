@@ -1,35 +1,31 @@
 const getDB = require('../../db/getDB');
-const { generateError } = require('../../helpers');
+const { generateError, deletePhoto } = require('../../helpers');
+
 const deleteWork = async (req, res, next) => {
     let connection;
 
     try {
         connection = await getDB();
 
-        const { idLink } = req.params;
+        const { idWork } = req.params;
 
-        const idUser = req.userAuth.id;
-
-        const [link] = await connection.query(
-            `SELECT * FROM link WHERE id = ?`,
-            [idLink]
+        const [works] = await connection.query(
+            `SELECT * FROM work WHERE id = ?`,
+            [idWork]
         );
 
-        if (link.length < 1) {
-            throw generateError('No existe el enlace seleccionado', 404);
+        if (works.length < 1) {
+            throw generateError('No existe el trabajo seleccionado', 404);
         }
 
-        if (idUser !== link[0].idUser) {
-            throw generateError(
-                'No eres el propietario del enlace a editar',
-                404
-            );
+        if (works[0].image) {
+            await deletePhoto(works[0].image);
         }
 
-        await connection.query(`DELETE FROM link WHERE id = ?`, [idLink]);
+        await connection.query(`DELETE FROM work WHERE id = ?`, [idWork]);
         res.send({
             status: 'Ok',
-            message: `El enlace con título "${link[0].title}", ha sido eliminado con éxito`,
+            message: `El enlace con título "${works[0].title}", ha sido eliminado con éxito`,
         });
     } catch (error) {
         next(error);
