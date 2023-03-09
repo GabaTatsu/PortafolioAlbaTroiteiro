@@ -1,0 +1,10 @@
+header h1 {
+  width: 20px;
+  word-wrap: break-word;
+  text-align: center;
+  float: right;
+}
+
+header {
+  background-color: black;
+}
