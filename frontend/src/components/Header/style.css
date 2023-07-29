@@ -1,10 +1,40 @@
-header h1 {
+header{
+  z-index: 1;
+  position: relative;
+}
+header>div{
+  display: flex;
+  flex-direction: column;
+  float: right;
+  margin-top: 20vh;
+  margin-right: 2vh;
+  gap: 2rem;
+}
+
+header>div>h1 {
   width: 20px;
   word-wrap: break-word;
   text-align: center;
-  float: right;
+  color: brown;
 }
 
-header {
-  background-color: black;
+header>aside {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  float: left;
+  margin-top: 40vh;
+  margin-left: 2vh;
 }
+header>aside>a{
+  text-decoration: none;
+  color: black;
+}
+header>aside>div{
+  display: flex;
+  justify-content: center;
+}
+header>aside img{
+  width: 30px;
+}
+

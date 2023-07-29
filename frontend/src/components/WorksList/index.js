@@ -1,3 +1,4 @@
+import "./style.css";
 import Work from "../Work";
 
 const WorksList = ({ works }) => {

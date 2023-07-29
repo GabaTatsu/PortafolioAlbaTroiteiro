@@ -1,0 +1,35 @@
+ul{
+    columns: 2;
+
+}
+ul>li{
+display: flex;
+width: 46.2vw;
+padding: 2px;
+    justify-content: center;
+    align-items: center;
+}
+ul>li>img{
+    width: 46.2vw;
+    transition-duration: 300ms;
+    transition-timing-function: ease-in-out;
+}
+ul>li>article{
+    width: 46.2vw;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    align-items: center;
+    opacity: 0;
+    transition-duration: 300ms;
+  transition-timing-function: ease-in-out;
+  z-index: 1;
+  color: white;
+}
+
+ul>li:hover>article{
+    opacity: 1;
+}
+ul>li:hover>img{
+    filter: brightness(50%);
+}

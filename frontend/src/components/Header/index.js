@@ -5,7 +5,11 @@ const Header = () => {
   return (
     <>
       <header>
-        <h1>ALBA TROITEIRO</h1>
+        <div>
+        <h1>ALBA</h1>
+        <h1>TROITEIRO</h1>
+        </div>
+        
         <NavBar></NavBar>
       </header>
     </>
