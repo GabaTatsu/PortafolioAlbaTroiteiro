@@ -1,7 +1,7 @@
 import Imagen from "../Imagen";
 
 const Work = ({ work }) => {
-  const { title, description, image, createdAt, id, idUser, category } = work;
+  const { title, description, image} = work;
   return (
     <>
     <article>

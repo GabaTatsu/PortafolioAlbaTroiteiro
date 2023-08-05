@@ -4,3 +4,35 @@
   box-sizing: border-box;
   list-style: none;
 }
+main{
+margin-left: 6.5rem;
+margin-right: 3.3rem;
+}
+section{
+display: flex;
+flex-direction: column;
+gap: 2rem;
+right: 2.7rem;
+top: 20%;
+position: fixed;
+z-index: 2;
+}
+
+section>h1 {
+  width: 20px;
+  word-wrap: break-word;
+  text-align: center;
+  color: brown;
+}
+
+footer{
+  border-top: thick double #32a1ce;
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+  padding-left: 4rem;
+  padding-right: 4rem;
+}
+footer img{
+  width: 40px;
+}

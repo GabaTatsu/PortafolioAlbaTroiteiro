@@ -6,9 +6,9 @@ const NavBar = () => {
     <>
     <aside>
     <Link to="/">TRABAJOS</Link>
-  <Link to="/">RETRATOS</Link>
-  <Link to="/">SOBRE MI</Link>
-  <Link to="/">CONTACTO</Link>
+  <Link to="/Portraits">RETRATOS</Link>
+  <Link to="/AboutMe">SOBRE MI</Link>
+  <Link to="/Contact">CONTACTO</Link>
   <div>
   <img src={instagramIcon} alt="INSTAGRAM"></img>
   </div>

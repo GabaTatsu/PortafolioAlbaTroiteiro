@@ -1,23 +1,6 @@
 header{
-  z-index: 1;
-  position: relative;
+  position: fixed;
 }
-header>div{
-  display: flex;
-  flex-direction: column;
-  float: right;
-  margin-top: 20vh;
-  margin-right: 2vh;
-  gap: 2rem;
-}
-
-header>div>h1 {
-  width: 20px;
-  word-wrap: break-word;
-  text-align: center;
-  color: brown;
-}
-
 header>aside {
   display: flex;
   flex-direction: column;
@@ -32,7 +15,7 @@ header>aside>a{
 }
 header>aside>div{
   display: flex;
-  justify-content: center;
+  justify-content: left;
 }
 header>aside img{
   width: 30px;

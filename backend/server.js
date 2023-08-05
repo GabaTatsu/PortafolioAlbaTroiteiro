@@ -45,6 +45,8 @@ const editUser = require('./controllers/users/editUser');
 
 const deleteWork = require('./controllers/works/deleteWork');
 const getWorks = require('./controllers/works/getWorks');
+const getPortraits = require('./controllers/works/getPortraits');
+const getAll = require('./controllers/works/getAll');
 const newWorks = require('./controllers/works/newWorks');
 const editWorks = require('./controllers/works/editWorks');
 
@@ -66,6 +68,8 @@ app.put('/users/edit', isAuth, editUser);
 
 app.delete('/works/delete/:idWork', isAuth, deleteWork);
 app.get('/works', getWorks);
+app.get('/Portraits', getPortraits);
+app.get('/All', getAll);
 app.post('/works/new', isAuth, newWorks);
 app.put('/works/:idWork', isAuth, editWorks);
 

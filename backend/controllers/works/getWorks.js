@@ -5,22 +5,16 @@ const getWorks = async (req, res, next) => {
 
     try {
         connection = await getDB();
-        const { category } = req.body;
+
 
         let works;
-
-        if (!category) {
-            [works] = await connection.query(`SELECT * FROM work`);
-        }
-
-        if (category) {
+   
             [works] = await connection.query(
-                `SELECT * FROM work WHERE category = ?`,
-                [category]
+                `SELECT * FROM work where category = 1 order by orderer`
             );
-        }
+        
 
-        if (works.length < 1) {
+        if (!works || works.length < 1) {
             throw generateError('No hay trabajos guardados', 404);
         }
 
