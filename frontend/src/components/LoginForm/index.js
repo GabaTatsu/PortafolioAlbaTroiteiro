@@ -1,33 +1,42 @@
 import { useState } from "react";
+import { useTokenContext } from "../../components/Contexts/TokenContext";
+import { useContext } from "react";
+import { NavigationContext } from "../Contexts/NavigationContext";
 
 const LoginForm = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const { setToken } = useTokenContext();
+    const { setRedirectTo } = useContext(NavigationContext);
 
-    return (
-      <form
-      onSubmit={async (event) => {
-        try {
+    const handleSubmit = async (event) => {
+      try {
           event.preventDefault();
 
-          const res = await fetch(`${process.env.REACT_APP_API_URL}/loginUser`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ username, password }),
+          const res = await fetch(`${process.env.REACT_APP_API_URL}/login`, {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ username, password }),
           });
 
           const body = await res.json();
 
           if (!res.ok) {
-            throw new Error(body.message);
+              throw new Error(body.message);
           }
-        } catch (error) {
+
+          setToken(body.authToken);
+          setRedirectTo("/Edit");
+      } catch (error) {
           console.error(error.message);
-        } finally {
-        }
-      }}
+      }
+  };
+
+    return (
+      <form
+      onSubmit={handleSubmit}
       >
         <label htmlFor="username">Nombre de Usuario:</label>
       <input
@@ -50,6 +59,8 @@ const LoginForm = () => {
       />
       <button type="submit">Iniciar sesión</button>
       </form>
+
     );
+    
   };
   export default LoginForm;

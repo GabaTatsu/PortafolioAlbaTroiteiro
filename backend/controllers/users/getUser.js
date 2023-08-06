@@ -6,7 +6,11 @@ const getUser = async (req, res, next) => {
 
     try {
         connection = await getDB();
-        const [user] = await connection.query(`SELECT username, id FROM user`);
+        const { idUser } = req.params;
+        const [[user]] = await connection.query(
+            `SELECT username, id, password FROM user WHERE id = ?`,
+            [idUser]
+        );
 
         if (!user) {
             throw generateError('No existe ningún usuario', 404);
@@ -14,7 +18,7 @@ const getUser = async (req, res, next) => {
 
         res.send({
             status: 'Ok',
-            data: user[0],
+            data: { ...user },
         });
     } catch (error) {
         next(error);

@@ -8,10 +8,14 @@ import AboutMe from "./pages/AboutMe";
 import Contact from "./pages/Contact";
 import Edit from "./pages/Edit"
 import Footer from "./components/Footer";
+import { CustomTokenContextProvider } from "./components/Contexts/TokenContext";
+import { CustomNavigationContextProvider } from "./components/Contexts/NavigationContext";
 
 function App() {
   return (
     <BrowserRouter>
+    <CustomTokenContextProvider>
+    <CustomNavigationContextProvider>
       <Header></Header>
       <Title></Title>
       <main>
@@ -25,6 +29,8 @@ function App() {
         </Routes>
       </main>
       <Footer></Footer>
+      </CustomNavigationContextProvider>
+      </CustomTokenContextProvider>
     </BrowserRouter>
   );
 }

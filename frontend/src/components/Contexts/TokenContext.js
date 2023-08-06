@@ -18,7 +18,7 @@ export const CustomTokenContextProvider = ({ children }) => {
         const decodedToken = JSON.parse(atob(token.split(".")[1]));
 
         const res = await fetch(
-          `${process.env.REACT_APP_API_URL}/users/${decodedToken.id}`
+          `${process.env.REACT_APP_API_URL}/user/${decodedToken.id}`
         );
         const body = await res.json();
 

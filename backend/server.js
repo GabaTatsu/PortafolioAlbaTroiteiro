@@ -56,7 +56,7 @@ const editWorks = require('./controllers/works/editWorks');
  * #############################
  */
 
-app.get('/user', isAuth, getUser);
+app.get('/user/:idUser', getUser);
 app.post('/login', loginUser);
 app.put('/users/edit', isAuth, editUser);
 
