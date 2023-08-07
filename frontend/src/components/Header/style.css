@@ -9,18 +9,22 @@ header>aside {
   margin-top: 40vh;
   margin-left: 2vh;
 }
-header>aside>button{
+header>aside button{
   all: unset;
   cursor: pointer;
 }
-header>aside>button:focus {
+header>aside button:focus {
   outline: revert;
 }
-header>aside>div{
+header>aside>{
   display: flex;
   justify-content: left;
 }
-header>aside img{
-  width: 30px;
+header>aside>div img{
+  width: 15px;
+  transform: rotate(-90deg);
+}
+header>aside>div:last-child img{
+  width: 25px;
 }
 

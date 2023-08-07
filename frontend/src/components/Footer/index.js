@@ -11,12 +11,14 @@ const Footer = () => {
   const { setRedirectTo } = useContext(NavigationContext);
 
     return (
-
      <footer>
         <p>Pie de página</p>
-        {show && (
-        <LoginForm></LoginForm>
+        {!loggedUser && show && (
+        <LoginForm
+        setShow={setShow}
+        ></LoginForm>
       )}
+      
         <button
         type="button"
         onClick={() => {
@@ -26,9 +28,8 @@ const Footer = () => {
           setShow(!show)
         }}
         ><img src={editIcon} alt="EDITAR"></img></button>
-        
+       
      </footer>
-
     );
   };
   export default Footer;

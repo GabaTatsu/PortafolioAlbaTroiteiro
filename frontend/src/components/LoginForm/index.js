@@ -3,7 +3,7 @@ import { useTokenContext } from "../../components/Contexts/TokenContext";
 import { useContext } from "react";
 import { NavigationContext } from "../Contexts/NavigationContext";
 
-const LoginForm = () => {
+const LoginForm = ({setShow}) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const { setToken } = useTokenContext();
@@ -29,6 +29,7 @@ const LoginForm = () => {
 
           setToken(body.authToken);
           setRedirectTo("/Edit");
+          setShow(false)
       } catch (error) {
           console.error(error.message);
       }

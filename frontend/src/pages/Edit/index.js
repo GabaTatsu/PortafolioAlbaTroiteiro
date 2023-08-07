@@ -7,18 +7,16 @@ const Edit = () => {
     const { works } = useAll();
     const { loggedUser } = useTokenContext();
     return (
-        
         <>
         {loggedUser && (
             <>
                 <UserData></UserData>
                 <WorksList works={works}></WorksList>
-                </>
+            </>
             )}
             {!loggedUser && (
-<p>INICIA SESIÓN PARA ACCEDER A ESTA SECCIÓN</p>
+        <p>INICIA SESIÓN PARA ACCEDER A ESTA SECCIÓN</p>
             )}
-        
         </>
     );
   };

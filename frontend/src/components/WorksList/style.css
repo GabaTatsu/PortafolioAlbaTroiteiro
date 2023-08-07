@@ -2,19 +2,21 @@ ul{
 
     column-count: 2;
     column-gap: 0.5%;
+    
 }
 ul>li{
 display: flex;
 max-width: 100%;
     justify-content: center;
     align-items: center;
-    padding-top: 1%;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
 }
 ul>li>img{
     max-width: 100%;
     transition-duration: 300ms;
     transition-timing-function: ease-in-out;
-
+    z-index: -3;
 }
 ul>li>article{
     display: flex;
@@ -26,7 +28,7 @@ ul>li>article{
     transition-duration: 300ms;
   transition-timing-function: ease-in-out;
   color: white;
-  z-index: 1;
+  z-index: -2;
 }
 
 ul>li:hover>article{

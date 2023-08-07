@@ -45,7 +45,7 @@ async function main() {
 
         await connection.query(
             `INSERT INTO user (username, password)
-            VALUES ('user', '${hashedPassword}')`
+            VALUES ('Alba', '${hashedPassword}')`
         );
 
         await connection.query(
