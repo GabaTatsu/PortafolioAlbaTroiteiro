@@ -1,5 +1,6 @@
 header{
   position: fixed;
+  z-index: 10;
 }
 header>aside {
   display: flex;
@@ -9,13 +10,11 @@ header>aside {
   margin-top: 40vh;
   margin-left: 2vh;
 }
-header>aside button{
-  all: unset;
-  cursor: pointer;
+header>aside a{
+text-decoration: none;
+color: black;
 }
-header>aside button:focus {
-  outline: revert;
-}
+
 header>aside>{
   display: flex;
   justify-content: left;
@@ -23,8 +22,27 @@ header>aside>{
 header>aside>div img{
   width: 15px;
   transform: rotate(-90deg);
+  animation: flechas 0.3s ease-in-out forwards;
 }
 header>aside>div:last-child img{
   width: 25px;
+}
+@keyframes flechas {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes doblar {
+  0% {
+    transform: rotate(0deg);
+    transform-origin: left bottom;
+  }
+  100% {
+    transform: rotate(45deg);
+      transform-origin: left bottom;
+  }
 }
 

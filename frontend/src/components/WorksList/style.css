@@ -1,8 +1,7 @@
 ul{
-
     column-count: 2;
     column-gap: 0.5%;
-    
+    z-index: 0;   
 }
 ul>li{
 display: flex;
@@ -16,7 +15,7 @@ ul>li>img{
     max-width: 100%;
     transition-duration: 300ms;
     transition-timing-function: ease-in-out;
-    z-index: -3;
+    z-index: 1;
 }
 ul>li>article{
     display: flex;
@@ -28,7 +27,7 @@ ul>li>article{
     transition-duration: 300ms;
   transition-timing-function: ease-in-out;
   color: white;
-  z-index: -2;
+  z-index: 3;
 }
 
 ul>li:hover>article{

@@ -1,13 +1,10 @@
 import { useState } from "react";
 import { useTokenContext } from "../../components/Contexts/TokenContext";
-import { useContext } from "react";
-import { NavigationContext } from "../Contexts/NavigationContext";
 
 const LoginForm = ({setShow}) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const { setToken } = useTokenContext();
-    const { setRedirectTo } = useContext(NavigationContext);
 
     const handleSubmit = async (event) => {
       try {
@@ -28,8 +25,8 @@ const LoginForm = ({setShow}) => {
           }
 
           setToken(body.authToken);
-          setRedirectTo("/Edit");
           setShow(false)
+          window.location.href = "/Edit";
       } catch (error) {
           console.error(error.message);
       }
@@ -58,7 +55,7 @@ const LoginForm = ({setShow}) => {
           setPassword(event.target.value);
         }}
       />
-      <button type="submit">Iniciar sesión</button>
+        <button type="submit">Iniciar sesión</button>
       </form>
 
     );

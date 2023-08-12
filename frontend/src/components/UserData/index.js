@@ -1,7 +1,5 @@
-import useUser from "../../hooks/UseUser";
-
-const Edit = () => {
-    const { user, setUser } = useUser();
+const Edit = ({user}) => {
+    
     const { username } = user;
 
     return (        

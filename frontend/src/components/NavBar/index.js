@@ -1,61 +1,67 @@
-import { useContext } from "react";
-import { NavigationContext } from "../Contexts/NavigationContext";
+import { useEffect } from "react";
 import instagramIcon from "../../assets/icons/icoinstagram.png";
-import { Navigate } from "react-router-dom";
 import arrowIcon from "../../assets/icons/down-arrow.png";
+import { Link, useLocation } from "react-router-dom";
 
-const NavBar = () => {
-  const { redirectTo, setRedirectTo } = useContext(NavigationContext);
+
+const NavBar = ({redirect, setRedirect}) => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname === "/Portraits" || location.pathname === "/AboutMe" || location.pathname === "/Contact" || location.pathname === "/Edit") {
+      setRedirect(location.pathname);
+    } else {
+      setRedirect("/");
+    }
+  }, [location.pathname]);
+
   return (
     <>
-    {redirectTo && <Navigate to={redirectTo} />}
-    <aside>
-      <div>
-        { redirectTo === "/" && (
-          <img src={arrowIcon} alt="TRABAJOS"></img>
-        )}
-      <button
-      onClick={() => {
-        setRedirectTo("/");
-      }}
-      >TRABAJOS</button>
-      </div>
-      <div>
-      { redirectTo === "/Portraits" && (
-      <img src={arrowIcon} alt="RETRATOS"></img>
-      )}
-      <button
-      onClick={() => {
-        setRedirectTo("/Portraits");
-      }}
-      >RETRATOS</button>
-      </div>
-      <div>
-      { redirectTo === "/AboutMe" && (
-      <img src={arrowIcon} alt="SOBRE MI"></img>
-      )}
-      <button
-      onClick={() => {
-        setRedirectTo("/AboutMe");
-      }}
-      >SOBRE MI</button>
-      </div>
-      <div>
-      { redirectTo === "/Contact" && (
-      <img src={arrowIcon} alt="CONTACTO"></img>
-      )}
-      <button
-      onClick={() => {
-        setRedirectTo("/Contact");
-      }}
-      >CONTACTO</button>
-      </div>
-      
-  <div>
-  <img src={instagramIcon} alt="INSTAGRAM"></img>
-  </div>
-  </aside>
-  </>
+      <aside>
+        <div>
+          {redirect === "/" && (
+            <img src={arrowIcon} alt="TRABAJOS"></img>
+          )}
+          <Link to="/" >
+            TRABAJOS
+          </Link>
+        </div>
+        <div>
+          {redirect === "/Portraits" && (
+            <img src={arrowIcon} alt="RETRATOS"></img>
+          )}
+          <Link to="/Portraits" >
+            RETRATOS
+          </Link>
+        </div>
+        <div>
+          {redirect === "/AboutMe" && (
+            <img src={arrowIcon} alt="SOBRE MI"></img>
+          )}
+          <Link to="/AboutMe" >
+            SOBRE MI
+          </Link>
+        </div>
+        <div>
+          {redirect === "/Contact" && (
+            <img src={arrowIcon} alt="CONTACTO"></img>
+          )}
+          <Link to="/Contact" >
+            CONTACTO
+          </Link>
+        </div>
+
+        <div>
+          <a
+            href="https://www.instagram.com/alba_troiteiro/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img src={instagramIcon} alt="INSTAGRAM"></img>
+          </a>
+        </div>
+      </aside>
+    </>
   );
 };
 export default NavBar;

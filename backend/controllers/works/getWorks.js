@@ -6,14 +6,11 @@ const getWorks = async (req, res, next) => {
     try {
         connection = await getDB();
 
-
         let works;
-   
             [works] = await connection.query(
-                `SELECT * FROM work where category = 1 order by orderer`
-            );
+                `SELECT * FROM work WHERE category = 1 ORDER BY orderer`
+            );          
         
-
         if (!works || works.length < 1) {
             throw generateError('No hay trabajos guardados', 404);
         }

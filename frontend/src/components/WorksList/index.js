@@ -1,13 +1,13 @@
 import "./style.css";
 import Work from "../Work";
 
-const WorksList = ({ works }) => {
+const WorksList = ({ works, deleteWork }) => {
   return (
     <ul>
       {works.map((work) => {
         return (
           <li key={work.id}>
-            <Work work={work} />
+            <Work work={work} deleteWork={deleteWork} />
           </li>
         );
       })}

@@ -1,13 +1,12 @@
-
 import WorksList from "../../components/WorksList";
 import useWorks from "../../hooks/useWorks";
 
 const Works = () => {
-  const { works } = useWorks();
+  const { works, deleteWork } = useWorks();
 
   return (
     <>
-  <WorksList works={works}></WorksList>
+  <WorksList works={works} deleteWork={deleteWork}></WorksList>
   
   </>
   );

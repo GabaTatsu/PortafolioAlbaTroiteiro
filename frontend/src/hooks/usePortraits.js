@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
 
-const useWorks = () => {
-  const [works, setWorks] = useState([]);
+const usePortraits = () => {
+  const [portraits, setPortraits] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchWorks = async () => {
       try {
-        const res = await fetch(`${process.env.REACT_APP_API_URL}/Portraits`);
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/portraits`,
+        );
 
         const body = await res.json();
 
-        setWorks(body.data);
+        setPortraits(body.data);
         if (!res.ok) {
           throw new Error(body.message);
         }
@@ -23,6 +24,15 @@ const useWorks = () => {
     };
     fetchWorks();
   }, []);
-  return { works, loading };
+
+  const deletePortrait = (id) => {
+    const indexToDelete = portraits.findIndex((portrait) => {
+      return portrait.id === id;
+    });
+    portraits.splice(indexToDelete, 1);
+    setPortraits([...portraits]);
+  };
+
+  return { portraits, loading, deletePortrait };
 };
-export default useWorks;
+export default usePortraits;

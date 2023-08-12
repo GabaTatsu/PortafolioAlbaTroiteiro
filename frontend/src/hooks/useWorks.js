@@ -7,7 +7,8 @@ const useWorks = () => {
   useEffect(() => {
     const fetchWorks = async () => {
       try {
-        const res = await fetch(`${process.env.REACT_APP_API_URL}/works`);
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/works`,
+        );
 
         const body = await res.json();
 
@@ -23,6 +24,15 @@ const useWorks = () => {
     };
     fetchWorks();
   }, []);
-  return { works, loading };
+
+  const deleteWork = (id) => {
+    const indexToDelete = works.findIndex((work) => {
+      return work.id === id;
+    });
+    works.splice(indexToDelete, 1);
+    setWorks([...works]);
+  };
+
+  return { works, loading, deleteWork};
 };
 export default useWorks;

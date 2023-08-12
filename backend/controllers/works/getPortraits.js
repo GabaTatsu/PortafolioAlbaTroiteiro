@@ -1,19 +1,16 @@
 const getDB = require('../../db/getDB');
 const { generateError } = require('../../helpers');
-const getWorks = async (req, res, next) => {
+const getPortraits = async (req, res, next) => {
     let connection;
 
     try {
         connection = await getDB();
 
-
         let works;
-   
             [works] = await connection.query(
-                `SELECT * FROM work where category = 0 order by orderer`
-            );
+                `SELECT * FROM work WHERE category = 0 ORDER BY orderer`
+            );          
         
-
         if (!works || works.length < 1) {
             throw generateError('No hay trabajos guardados', 404);
         }
@@ -29,4 +26,4 @@ const getWorks = async (req, res, next) => {
     }
 };
 
-module.exports = getWorks;
+module.exports = getPortraits;

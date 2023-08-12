@@ -9,14 +9,14 @@ import Contact from "./pages/Contact";
 import Edit from "./pages/Edit"
 import Footer from "./components/Footer";
 import { CustomTokenContextProvider } from "./components/Contexts/TokenContext";
-import { CustomNavigationContextProvider } from "./components/Contexts/NavigationContext";
+import { useState } from "react";
 
 function App() {
+  const [ redirect, setRedirect ] = useState("/");
   return (
     <BrowserRouter>
     <CustomTokenContextProvider>
-    <CustomNavigationContextProvider>
-      <Header></Header>
+      <Header redirect={redirect} setRedirect={setRedirect}></Header>
       <Title></Title>
       <main>
         <Routes>
@@ -28,8 +28,7 @@ function App() {
           <Route path="*" element={<Works />} />
         </Routes>
       </main>
-      <Footer></Footer>
-      </CustomNavigationContextProvider>
+      <Footer setRedirect={setRedirect}></Footer>
       </CustomTokenContextProvider>
     </BrowserRouter>
   );

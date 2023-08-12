@@ -1,11 +1,11 @@
 import NavBar from "../NavBar";
 import "./style.css";
 
-const Header = () => {
+const Header = ({redirect, setRedirect}) => {
   return (
     <>
-      <header>      
-        <NavBar></NavBar>
+      <header >      
+        <NavBar redirect={redirect} setRedirect={setRedirect}></NavBar>
       </header>
     </>
   );
