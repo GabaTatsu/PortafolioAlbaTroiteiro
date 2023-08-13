@@ -1,11 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import instagramIcon from "../../assets/icons/icoinstagram.png";
 import arrowIcon from "../../assets/icons/down-arrow.png";
 import { Link, useLocation } from "react-router-dom";
 
 
-const NavBar = ({redirect, setRedirect}) => {
+const NavBar = () => {
   const location = useLocation();
+  const [ redirect, setRedirect ] = useState("/");
 
   useEffect(() => {
     if (location.pathname === "/Portraits" || location.pathname === "/AboutMe" || location.pathname === "/Contact" || location.pathname === "/Edit") {

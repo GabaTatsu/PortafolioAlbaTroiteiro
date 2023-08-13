@@ -1,7 +1,7 @@
 import { useTokenContext } from "../Contexts/TokenContext";
 import logoutIcon from "../../assets/icons/logout.png";
 
-const Logout = ({setRedirect}) => {
+const Logout = () => {
   const { setToken, setLoggedUser } = useTokenContext();
 
   return (    
@@ -9,7 +9,6 @@ const Logout = ({setRedirect}) => {
         onClick={() => {
           setToken("");
           setLoggedUser("");
-          setRedirect("/")
         }}
       >
         <img src={logoutIcon} alt="Cerrar sesión"></img>

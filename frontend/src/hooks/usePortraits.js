@@ -33,6 +33,6 @@ const usePortraits = () => {
     setPortraits([...portraits]);
   };
 
-  return { portraits, loading, deletePortrait };
+  return { portraits, setPortraits, loading, deletePortrait };
 };
 export default usePortraits;

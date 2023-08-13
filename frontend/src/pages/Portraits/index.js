@@ -3,9 +3,9 @@ import usePortraits from "../../hooks/usePortraits";
 
 
 const Works = () => {
-  const { portraits, deletePortrait } = usePortraits();
+  const { portraits, deletePortrait, setPortraits } = usePortraits();
 
-  return <WorksList works={portraits} deleteWork={deletePortrait}></WorksList>;
+  return <WorksList works={portraits} setPortraits={setPortraits} deleteWork={deletePortrait}></WorksList>;
 };
 
 export default Works;

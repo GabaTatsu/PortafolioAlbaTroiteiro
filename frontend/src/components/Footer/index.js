@@ -5,7 +5,7 @@ import { useTokenContext } from "../Contexts/TokenContext";
 import Logout from "../Logout";
 import { Link } from "react-router-dom";
 
-const Footer = ({setRedirect}) => {
+const Footer = () => {
   const [show, setShow] = useState(false);
   const { loggedUser } = useTokenContext();
 
@@ -28,7 +28,7 @@ const Footer = ({setRedirect}) => {
             <img src={editIcon} alt="EDITAR"></img>
           </button>
         )}
-        {loggedUser && <Logout setRedirect={setRedirect}></Logout>}
+        {loggedUser && <Logout ></Logout>}
       </div>
     </footer>
     );

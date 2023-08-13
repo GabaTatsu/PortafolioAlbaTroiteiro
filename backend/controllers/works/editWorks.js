@@ -9,15 +9,15 @@ const editWorks = async (req, res, next) => {
 
         const { idWork } = req.params;
 
-        const { title, description, category } = req.body;
-        const imagen = req.files?.image;
+        const { title, description, category, orderer } = req.body;
+        const imagen = req.files?.imagen;
 
-        if (!(title || description || category || imagen)) {
+        if (!(title || description || category || imagen || orderer)) {
             throw generateError('No se ha modificado ningún dato', 400);
         }
 
         const [works] = await connection.query(
-            `SELECT title, description, image, category FROM work WHERE id = ?`,
+            `SELECT title, description, image, category, orderer FROM work WHERE id = ?`,
             [idWork]
         );
 
@@ -43,6 +43,7 @@ const editWorks = async (req, res, next) => {
                 title || works[0].title,
                 description || works[0].description,
                 category || works[0].category,
+                orderer || works[0].orderer,
                 idWork,
             ]
         );
@@ -50,6 +51,7 @@ const editWorks = async (req, res, next) => {
         res.send({
             status: 'Ok',
             message: `El enlace con título "${title}", ha sido modificado con éxito!`,
+            data: imageName,
         });
     } catch (error) {
         next(error);

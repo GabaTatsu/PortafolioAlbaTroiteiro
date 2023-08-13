@@ -2,11 +2,11 @@ import WorksList from "../../components/WorksList";
 import useWorks from "../../hooks/useWorks";
 
 const Works = () => {
-  const { works, deleteWork } = useWorks();
+  const { works, deleteWork, setWorks } = useWorks();
 
   return (
     <>
-  <WorksList works={works} deleteWork={deleteWork}></WorksList>
+  <WorksList works={works} setWorks={setWorks} deleteWork={deleteWork}></WorksList>
   
   </>
   );

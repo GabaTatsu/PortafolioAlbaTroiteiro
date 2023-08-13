@@ -8,8 +8,8 @@ import useUser from "../../hooks/UseUser";
 
 const Edit = () => {
     const { loggedUser } = useTokenContext();
-    const { works, deleteWork } = useWorks();
-    const { portraits, deletePortrait } = usePortraits();
+    const { works, setWorks, deleteWork } = useWorks();
+    const { portraits, setPortraits, deletePortrait } = usePortraits();
     const { user, setUser} = useUser();
 
     return (
@@ -20,9 +20,9 @@ const Edit = () => {
                 <EditUserForm user={user} setUser={setUser}></EditUserForm>
                 <div>
                 <h4>TRABAJOS</h4>
-                <WorksList works={works} deleteWork={deleteWork}></WorksList>
+                <WorksList works={works} setWorks={setWorks} deleteWork={deleteWork}></WorksList>
                 <h4>RETRATOS</h4>
-                <WorksList works={portraits} deleteWork={deletePortrait}></WorksList>;
+                <WorksList works={portraits} setPortraits={setPortraits} deleteWork={deletePortrait}></WorksList>;
                 </div>
             </>
             )}

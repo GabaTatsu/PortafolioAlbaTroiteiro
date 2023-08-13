@@ -1,0 +1,20 @@
+.editform {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+}
+.editform form{
+display: flex;
+flex-direction: column;
+text-align: center;
+align-items: center;
+gap: 0.5rem;
+margin-top: 1rem;
+}
+.editform img{
+max-width: 60%;
+}
+.editform>form button{
+    max-width: 20%;
+}

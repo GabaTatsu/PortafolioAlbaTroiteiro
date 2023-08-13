@@ -9,14 +9,12 @@ import Contact from "./pages/Contact";
 import Edit from "./pages/Edit"
 import Footer from "./components/Footer";
 import { CustomTokenContextProvider } from "./components/Contexts/TokenContext";
-import { useState } from "react";
 
 function App() {
-  const [ redirect, setRedirect ] = useState("/");
   return (
     <BrowserRouter>
     <CustomTokenContextProvider>
-      <Header redirect={redirect} setRedirect={setRedirect}></Header>
+      <Header></Header>
       <Title></Title>
       <main>
         <Routes>
@@ -28,7 +26,7 @@ function App() {
           <Route path="*" element={<Works />} />
         </Routes>
       </main>
-      <Footer setRedirect={setRedirect}></Footer>
+      <Footer></Footer>
       </CustomTokenContextProvider>
     </BrowserRouter>
   );

@@ -33,6 +33,6 @@ const useWorks = () => {
     setWorks([...works]);
   };
 
-  return { works, loading, deleteWork};
+  return { works, setWorks, loading, deleteWork};
 };
 export default useWorks;
