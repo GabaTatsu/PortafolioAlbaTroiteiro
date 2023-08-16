@@ -1,11 +1,11 @@
 import WorksList from "../../components/WorksList";
-import usePortraits from "../../hooks/usePortraits";
+import useWorks from "../../hooks/useWorks";
 
 
 const Works = () => {
-  const { portraits, deletePortrait, setPortraits } = usePortraits();
+  const { works, deleteWork, } = useWorks({workType: "0"});
 
-  return <WorksList works={portraits} setPortraits={setPortraits} deleteWork={deletePortrait}></WorksList>;
+  return <WorksList works={works} deleteWork={deleteWork}></WorksList>;
 };
 
 export default Works;

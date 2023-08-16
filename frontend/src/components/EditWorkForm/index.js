@@ -3,12 +3,12 @@ import "./style.css";
 import { useTokenContext } from "../Contexts/TokenContext";
 import Imagen from "../Imagen";
 
-const EditWorkForm = ({id, setEditTitle, editTitle, setEditDescription, editDescription, setEditImage, editImage }) => {
+const EditWorkForm = ({id, setEditTitle, editTitle, setEditDescription, editDescription, setEditImage, editImage, setEditWorkForm, editWorkForm, category,}) => {
   const { token } = useTokenContext();
   const [title, setTitle] = useState(editTitle);
   const [description, setDescription] = useState(editDescription);
   const [newImage, setNewImage] = useState();
-  const [editWorkForm, setEditWorkForm] = useState(false);
+  const [newCategory, setNewCategory] = useState(category);
   const newImageRef = useRef();
 
   return (
@@ -35,6 +35,7 @@ const EditWorkForm = ({id, setEditTitle, editTitle, setEditDescription, editDesc
                   formData.append("imagen", file);
                   formData.append("title", title);
                   formData.append("description", description);
+                  formData.append("category", newCategory);
 
                 const res = await fetch(
                   `${process.env.REACT_APP_API_URL}/works/${id}`,
@@ -61,6 +62,10 @@ const EditWorkForm = ({id, setEditTitle, editTitle, setEditDescription, editDesc
                 if (newImage) {
                   setEditImage(newImage);
                 }
+                if (newCategory !== category) {
+                  
+                  
+                }
 
                 setEditWorkForm(false);
               }
@@ -69,7 +74,7 @@ const EditWorkForm = ({id, setEditTitle, editTitle, setEditDescription, editDesc
               } finally {
               }
             }}
-          >
+          >            
               <label htmlFor="title">Título:</label>
               <input
                 id="title"
@@ -86,6 +91,17 @@ const EditWorkForm = ({id, setEditTitle, editTitle, setEditDescription, editDesc
                   setDescription(event.target.value);
                 }}
               />
+              <label htmlFor="category">Categoría:</label>
+              <select 
+              id="category"
+              value={newCategory}
+              onChange={(event) => {
+                setNewCategory(event.target.value);
+              }}
+              >
+                <option value="0">RETRATO</option>
+                <option value="1">TRABAJO</option>
+              </select>
                <label htmlFor="image">
         {!newImage && (
           <Imagen image={editImage} title={editTitle} />

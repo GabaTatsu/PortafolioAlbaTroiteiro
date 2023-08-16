@@ -6,9 +6,12 @@ const getWorks = async (req, res, next) => {
     try {
         connection = await getDB();
 
+        let { category } = req.query;
+
         let works;
             [works] = await connection.query(
-                `SELECT * FROM work WHERE category = 1 ORDER BY orderer`
+                `SELECT * FROM work WHERE category = ? ORDER BY orderer`,
+                [category]
             );          
         
         if (!works || works.length < 1) {

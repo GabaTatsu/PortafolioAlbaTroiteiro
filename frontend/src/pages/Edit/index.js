@@ -2,14 +2,13 @@ import WorksList from "../../components/WorksList";
 import UserData from "../../components/UserData"
 import { useTokenContext } from "../../components/Contexts/TokenContext";
 import useWorks from "../../hooks/useWorks";
-import usePortraits from "../../hooks/usePortraits";
 import EditUserForm from "../../components/EditUserForm";
 import useUser from "../../hooks/UseUser";
+import EditWork from "../../components/EditWork";
+import EditPortrait from "../../components/EditPortrait";
 
 const Edit = () => {
     const { loggedUser } = useTokenContext();
-    const { works, setWorks, deleteWork } = useWorks();
-    const { portraits, setPortraits, deletePortrait } = usePortraits();
     const { user, setUser} = useUser();
 
     return (
@@ -19,10 +18,8 @@ const Edit = () => {
                 <UserData user={user}></UserData>
                 <EditUserForm user={user} setUser={setUser}></EditUserForm>
                 <div>
-                <h4>TRABAJOS</h4>
-                <WorksList works={works} setWorks={setWorks} deleteWork={deleteWork}></WorksList>
-                <h4>RETRATOS</h4>
-                <WorksList works={portraits} setPortraits={setPortraits} deleteWork={deletePortrait}></WorksList>;
+                <EditWork></EditWork>
+                <EditPortrait></EditPortrait>
                 </div>
             </>
             )}

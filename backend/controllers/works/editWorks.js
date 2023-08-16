@@ -38,7 +38,7 @@ const editWorks = async (req, res, next) => {
         }
 
         await connection.query(
-            `UPDATE work SET title = ?, description = ?, category = ? WHERE id = ?`,
+            `UPDATE work SET title = ?, description = ?, category = ?, orderer=? WHERE id = ?`,
             [
                 title || works[0].title,
                 description || works[0].description,
