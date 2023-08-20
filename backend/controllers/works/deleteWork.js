@@ -18,6 +18,14 @@ const deleteWork = async (req, res, next) => {
             throw generateError('No existe el trabajo seleccionado', 404);
         }
 
+        await connection.query(
+            `UPDATE work SET orderer = orderer - 1 WHERE category = ? AND orderer > ?`,
+            [
+                works[0].category,
+                works[0].orderer,
+            ]
+        );
+
         if (works[0].image) {
             await deletePhoto(works[0].image);
         }

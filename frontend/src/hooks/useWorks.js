@@ -42,6 +42,41 @@ const useWorks = ({workType}) => {
     }
   };  
 
-  return { works, loading, deleteWork};
+  const reorder = ({id, direction}) => {
+    const updatedArrays = [...works];
+
+    const targetIndex = updatedArrays.findIndex((obj) => obj.id === id);
+    if (targetIndex === -1) {
+      return;
+    }
+  
+    const targetObject = updatedArrays[targetIndex];
+    const targetOrderer = targetObject.orderer;
+  
+    if (direction === 0 && targetOrderer > 1) {
+      targetObject.orderer--;
+  
+      const previousIndex = targetIndex - 1;
+      if (previousIndex >= 0) {
+        updatedArrays[previousIndex].orderer++;
+      }
+    }
+    
+    if (direction === 1 && targetOrderer < updatedArrays.length) {
+      targetObject.orderer++;
+  
+      const nextIndex = targetIndex + 1;
+      if (nextIndex < updatedArrays.length) {
+        updatedArrays[nextIndex].orderer--;
+      }
+    }
+  
+    updatedArrays.sort((a, b) => a.orderer - b.orderer);
+  
+      setWorks(updatedArrays);
+  }; 
+
+
+  return { works, loading, deleteWork, reorder};
 };
 export default useWorks;

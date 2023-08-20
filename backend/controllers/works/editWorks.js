@@ -9,10 +9,10 @@ const editWorks = async (req, res, next) => {
 
         const { idWork } = req.params;
 
-        const { title, description, category, orderer } = req.body;
+        const { title, description, category } = req.body;
         const imagen = req.files?.imagen;
 
-        if (!(title || description || category || imagen || orderer)) {
+        if (!(title || description || category || imagen)) {
             throw generateError('No se ha modificado ningún dato', 400);
         }
 
@@ -37,20 +37,44 @@ const editWorks = async (req, res, next) => {
             ]);
         }
 
+        if (category !== works[0].category) {
+            await connection.query(
+                `UPDATE work SET orderer = orderer - 1 WHERE category = ? AND orderer > ?`,
+                [
+                    works[0].category,
+                    works[0].orderer,
+                ]
+            );
+            const lastOrderer = await connection.query(
+                `SELECT MAX(orderer) as maxOrderer FROM work WHERE category = ?`,
+                [
+                    category,
+                ]
+            );
+            const lastOrdererValue = lastOrderer[0]
+            const newOrderer = lastOrdererValue[0].maxOrderer + 1;
+            await connection.query(
+                `UPDATE work SET orderer = ? WHERE id = ?`,
+                [
+                    newOrderer,
+                    idWork,
+                ]
+            );
+        }        
+
         await connection.query(
-            `UPDATE work SET title = ?, description = ?, category = ?, orderer=? WHERE id = ?`,
+            `UPDATE work SET title = ?, description = ?, category = ? WHERE id = ?`,
             [
                 title || works[0].title,
                 description || works[0].description,
                 category || works[0].category,
-                orderer || works[0].orderer,
                 idWork,
             ]
         );
 
         res.send({
             status: 'Ok',
-            message: `El enlace con título "${title}", ha sido modificado con éxito!`,
+            message: `El enlace ha sido modificado con éxito!`,
             data: imageName,
         });
     } catch (error) {

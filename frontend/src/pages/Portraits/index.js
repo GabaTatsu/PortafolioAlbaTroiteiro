@@ -3,9 +3,9 @@ import useWorks from "../../hooks/useWorks";
 
 
 const Works = () => {
-  const { works, deleteWork, } = useWorks({workType: "0"});
+  const { works, deleteWork, reorder } = useWorks({workType: "0"});
 
-  return <WorksList works={works} deleteWork={deleteWork}></WorksList>;
+  return <WorksList works={works} deleteWork={deleteWork} reorder={reorder}></WorksList>;
 };
 
 export default Works;

@@ -3,7 +3,7 @@ import "./style.css";
 import { useTokenContext } from "../Contexts/TokenContext";
 import Imagen from "../Imagen";
 
-const EditWorkForm = ({id, setEditTitle, editTitle, setEditDescription, editDescription, setEditImage, editImage, setEditWorkForm, editWorkForm, category,}) => {
+const EditWorkForm = ({id, deleteWork, setEditTitle, editTitle, setEditDescription, editDescription, setEditImage, editImage, setEditWorkForm, editWorkForm, category}) => {
   const { token } = useTokenContext();
   const [title, setTitle] = useState(editTitle);
   const [description, setDescription] = useState(editDescription);
@@ -62,9 +62,8 @@ const EditWorkForm = ({id, setEditTitle, editTitle, setEditDescription, editDesc
                 if (newImage) {
                   setEditImage(newImage);
                 }
-                if (newCategory !== category) {
-                  
-                  
+                if (newCategory !== category) {                  
+                  deleteWork(id);
                 }
 
                 setEditWorkForm(false);

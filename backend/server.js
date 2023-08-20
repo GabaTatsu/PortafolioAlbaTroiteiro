@@ -47,6 +47,7 @@ const deleteWork = require('./controllers/works/deleteWork');
 const getWorks = require('./controllers/works/getWorks');
 const newWorks = require('./controllers/works/newWorks');
 const editWorks = require('./controllers/works/editWorks');
+const changeOrder = require('./controllers/works/changeOrder');
 
 /**
  * #############################
@@ -68,6 +69,7 @@ app.delete('/works/delete/:idWork', isAuth, deleteWork);
 app.get('/works', getWorks);
 app.post('/works/new', isAuth, newWorks);
 app.put('/works/:idWork', isAuth, editWorks);
+app.put('/works/order/:idWork', isAuth, changeOrder);
 
 //////////////////////
 

@@ -1,15 +1,15 @@
-import WorksList from "../../components/WorksList";
 import UserData from "../../components/UserData"
 import { useTokenContext } from "../../components/Contexts/TokenContext";
-import useWorks from "../../hooks/useWorks";
 import EditUserForm from "../../components/EditUserForm";
 import useUser from "../../hooks/UseUser";
 import EditWork from "../../components/EditWork";
 import EditPortrait from "../../components/EditPortrait";
+import { useState } from "react";
 
 const Edit = () => {
     const { loggedUser } = useTokenContext();
     const { user, setUser} = useUser();
+    const [changeWorks, setChangeWorks] = useState("RETRATOS");
 
     return (
         <>
@@ -18,8 +18,18 @@ const Edit = () => {
                 <UserData user={user}></UserData>
                 <EditUserForm user={user} setUser={setUser}></EditUserForm>
                 <div>
-                <EditWork></EditWork>
-                <EditPortrait></EditPortrait>
+                    <button
+                    onClick={()=>{
+                        if(changeWorks === "RETRATOS"){
+                            setChangeWorks("TRABAJOS")
+                        } else {
+                            setChangeWorks("RETRATOS")
+                        }
+                        }
+                    }
+                    >{changeWorks}</button>
+                    {changeWorks === "RETRATOS" && <EditWork></EditWork>}
+                    {changeWorks === "TRABAJOS" && <EditPortrait></EditPortrait>}                
                 </div>
             </>
             )}

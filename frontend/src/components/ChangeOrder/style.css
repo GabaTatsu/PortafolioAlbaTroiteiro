@@ -1,0 +1,10 @@
+.orderArrows{
+    display: flex;
+    gap: 0.5rem;
+}
+.orderArrows button:first-child{
+    transform: rotate(180deg);
+}
+.orderArrows img{
+max-width: 2rem;
+}

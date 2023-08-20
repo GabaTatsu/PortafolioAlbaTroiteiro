@@ -3,8 +3,9 @@ import { useTokenContext } from "../Contexts/TokenContext";
 import AlertDeleteWork from "../AlertDeleteWork";
 import EditWorkForm from "../EditWorkForm";
 import { useState } from "react";
+import ChangeOrder from "../ChangeOrder";
 
-const Work = ({ work, deleteWork }) => {
+const Work = ({ work, deleteWork, reorder }) => {
   const { loggedUser } = useTokenContext();
   const { title, description, image, id, orderer, category, createdAt} = work;
   const [editTitle, setEditTitle] = useState(title);
@@ -27,12 +28,13 @@ const Work = ({ work, deleteWork }) => {
       {category === 0 && <p>RETRATO</p>}
       {category === 1 && <p>TRABAJO</p>}
       <p>ORDEN:{orderer}º</p>
+      <ChangeOrder id={id} reorder={reorder}></ChangeOrder>
       <AlertDeleteWork id={id} title={title} deleteWork={deleteWork}></AlertDeleteWork>
       </>
       )}       
       {loggedUser && (
         <>     
-      <EditWorkForm id={id} setEditTitle={setEditTitle} editTitle={editTitle} setEditDescription={setEditDescription} editDescription={editDescription} setEditImage={setEditImage} editImage={editImage} editWorkForm={editWorkForm} setEditWorkForm={setEditWorkForm} category={category} ></EditWorkForm>
+      <EditWorkForm id={id} deleteWork={deleteWork} setEditTitle={setEditTitle} editTitle={editTitle} setEditDescription={setEditDescription} editDescription={editDescription} setEditImage={setEditImage} editImage={editImage} editWorkForm={editWorkForm} setEditWorkForm={setEditWorkForm} category={category} ></EditWorkForm>
       </>
       )}
      </article>
