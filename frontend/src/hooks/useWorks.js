@@ -76,7 +76,20 @@ const useWorks = ({workType}) => {
       setWorks(updatedArrays);
   }; 
 
+  const adWork = ({ newObject }) => {
+    const maxOrderer = Math.max(...works.map(item => item.orderer), 0);
+  
+    const updatedObject = {
+      ...newObject,
+      orderer: maxOrderer + 1,
+      createdAt: new Date().toISOString(),
+    };
+  
+    const newUpdatedWorks = [...works, updatedObject];
+    setWorks(newUpdatedWorks);
+  };
 
-  return { works, loading, deleteWork, reorder};
+
+  return { works, loading, deleteWork, reorder, adWork};
 };
 export default useWorks;

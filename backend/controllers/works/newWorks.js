@@ -24,19 +24,31 @@ const newWorks = async (req, res, next) => {
             throw generateError('Debes marcar una categoría', 400);
         }
 
-        const [user] = await connection.query(`SELECT * FROM user`);
         let imageName;
         imageName = await savePhoto(image);
 
+        const [lastOrderer] = await connection.query(
+            `SELECT MAX(orderer) as maxOrderer FROM work WHERE category = ?`,
+            [
+                category,
+            ]
+        );
+
+
         await connection.query(
-            `INSERT INTO work (title, description, image, category, createdAt, idUser)
-            VALUES (?, ?, ?, ?, ?, ?)`,
-            [title, description, imageName, category, new Date(), 1]
+            `INSERT INTO work (title, description, image, orderer, category, createdAt, idUser)
+            VALUES (?, ?, ?, ?, ?, ?, ?)`,
+            [title, description, imageName,(lastOrderer[0].maxOrderer + 1), category, new Date(), 1]
+        );
+
+        const [lastId] = await connection.query(
+            `SELECT MAX(id) as maxId FROM work`
         );
 
         res.send({
             status: 'Ok',
             message: 'Enlace insertado con éxito!',
+            data: { imageName, newId: lastId[0].maxId},
         });
     } catch (error) {
         next(error);

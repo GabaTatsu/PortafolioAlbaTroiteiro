@@ -75,7 +75,6 @@ const editWorks = async (req, res, next) => {
         res.send({
             status: 'Ok',
             message: `El enlace ha sido modificado con éxito!`,
-            data: imageName,
         });
     } catch (error) {
         next(error);
