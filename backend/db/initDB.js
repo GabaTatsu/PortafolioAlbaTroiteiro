@@ -11,6 +11,8 @@ async function main() {
         console.log('Eliminando tablas...');
 
         await connection.query('DROP TABLE IF EXISTS work');
+        await connection.query('DROP TABLE IF EXISTS aboutme');
+        await connection.query('DROP TABLE IF EXISTS contact');
         await connection.query('DROP TABLE IF EXISTS user');
 
         console.log('Tablas eliminadas!');
@@ -34,6 +36,28 @@ async function main() {
                 orderer INT,
                 category BOOLEAN,
                 createdAt DATETIME,
+                idUser INT UNSIGNED NOT NULL,
+                FOREIGN KEY (idUser) REFERENCES user (id)
+                ON DELETE CASCADE
+            )
+        `);
+
+        await connection.query(`
+            CREATE TABLE IF NOT EXISTS aboutme (
+                id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+                imageaboutme varchar(255),
+                descriptionaboutme TEXT,
+                idUser INT UNSIGNED NOT NULL,
+                FOREIGN KEY (idUser) REFERENCES user (id)
+                ON DELETE CASCADE
+            )
+        `);
+
+        await connection.query(`
+            CREATE TABLE IF NOT EXISTS contact (
+                id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+                titlecontact varchar(255),
+                descriptioncontact TEXT,
                 idUser INT UNSIGNED NOT NULL,
                 FOREIGN KEY (idUser) REFERENCES user (id)
                 ON DELETE CASCADE
@@ -66,6 +90,17 @@ async function main() {
             ('retrato6', 'retrato6', 'parella.jpg', 6, false, '2022-08-09 17:00:00', 1),
             ('retrato7', 'retrato7', 'yuri.jpg', 7, false, '2022-08-09 17:00:00', 1),
             ('retrato8', 'retrato8', 'D0E6A152-6B1C-4A38-BF62-FE6F2B5121EA.JPG', 8, false, '2022-08-09 17:00:00', 1)`
+        );
+
+        await connection.query(
+            `INSERT INTO aboutme (imageaboutme, descriptionaboutme, idUser)
+            VALUES ('MIKE6071.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et eros porta, dignissim urna eget, malesuada nisi. Sed risus dui, vehicula sit amet dui nec, eleifend cursus neque. Fusce aliquam vehicula sagittis. Nam fringilla ut libero a laoreet. Maecenas id accumsan ligula. Vestibulum pulvinar tortor urna, sed tristique turpis porta at. Mauris auctor pellentesque blandit. Praesent tincidunt lacus nec ipsum ultrices aliquet. Aliquam non lacus at nulla dapibus pellentesque.', 1),
+            ('MIKE6071.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et eros porta, dignissim urna eget, malesuada nisi. Sed risus dui, vehicula sit amet dui nec, eleifend cursus neque. Fusce aliquam vehicula sagittis. Nam fringilla ut libero a laoreet. Maecenas id accumsan ligula. Vestibulum pulvinar tortor urna, sed tristique turpis porta at. Mauris auctor pellentesque blandit. Praesent tincidunt lacus nec ipsum ultrices aliquet. Aliquam non lacus at nulla dapibus pellentesque.', 1)`
+        );
+
+        await connection.query(
+            `INSERT INTO contact (titlecontact, descriptioncontact, idUser)
+            VALUES ('CONTACTO', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et eros porta, dignissim urna eget, malesuada nisi. Sed risus dui, vehicula sit amet dui nec, eleifend cursus neque. Fusce aliquam vehicula sagittis. Nam fringilla ut libero a laoreet. Maecenas id accumsan ligula. Vestibulum pulvinar tortor urna, sed tristique turpis porta at. Mauris auctor pellentesque blandit. Praesent tincidunt lacus nec ipsum ultrices aliquet. Aliquam non lacus at nulla dapibus pellentesque.', 1)`
         );
 
         console.log('Datos de prueba insertados con exito!');

@@ -3,7 +3,7 @@
 const Title = () =>{
     return (
 
-          <section>
+<section className="title">
 <h1>ALBA</h1>
 <h1>TROITEIRO</h1>
 </section>

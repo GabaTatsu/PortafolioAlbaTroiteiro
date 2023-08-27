@@ -9,7 +9,7 @@ const NavBar = () => {
   const [ redirect, setRedirect ] = useState("/");
 
   useEffect(() => {
-    if (location.pathname === "/Portraits" || location.pathname === "/AboutMe" || location.pathname === "/Contact" || location.pathname === "/Edit") {
+    if (location.pathname === "/Portraits" || location.pathname === "/AboutMe" || location.pathname === "/Edit") {
       setRedirect(location.pathname);
     } else {
       setRedirect("/");
@@ -37,21 +37,13 @@ const NavBar = () => {
         </div>
         <div>
           {redirect === "/AboutMe" && (
-            <img src={arrowIcon} alt="SOBRE MI"></img>
+            <img src={arrowIcon} alt="SOBRE MI/CONTACTO"></img>
           )}
           <Link to="/AboutMe" >
-            SOBRE MI
+            <p>SOBRE MI</p>
+            <p>CONTACTO</p>
           </Link>
         </div>
-        <div>
-          {redirect === "/Contact" && (
-            <img src={arrowIcon} alt="CONTACTO"></img>
-          )}
-          <Link to="/Contact" >
-            CONTACTO
-          </Link>
-        </div>
-
         <div>
           <a
             href="https://www.instagram.com/alba_troiteiro/"

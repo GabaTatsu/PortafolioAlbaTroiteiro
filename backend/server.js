@@ -50,6 +50,14 @@ const editWorks = require('./controllers/works/editWorks');
 const changeOrder = require('./controllers/works/changeOrder');
 
 /**
+ * ##############################
+ * ### CONTROLADORES DE ABOUTME ###
+ * ##############################
+ */
+
+const getAboutMe = require('./controllers/aboutMe/getAboutMe');
+
+/**
  * #############################
  * ### ENDPOINTS DE USERS ###
  * #############################
@@ -70,6 +78,14 @@ app.get('/works', getWorks);
 app.post('/works/new', isAuth, newWorks);
 app.put('/works/:idWork', isAuth, editWorks);
 app.put('/works/order/:idWork', isAuth, changeOrder);
+
+/**
+ * ##########################
+ * ### ENDPOINTS DE ABOUTME ###
+ * ##########################
+ */
+
+app.get('/aboutme', getAboutMe);
 
 //////////////////////
 

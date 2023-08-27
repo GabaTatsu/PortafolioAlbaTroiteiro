@@ -5,11 +5,11 @@
   list-style: none;
 }
 main{
-margin-left: 7.3rem;
-margin-right: 3.3rem;
-z-index: 5;
+  margin-left: 7.3rem;
+  margin-right: 3.3rem;
+  z-index: 5;
 }
-section{
+.title{
 display: flex;
 flex-direction: column;
 gap: 2rem;
@@ -19,7 +19,7 @@ position: fixed;
 z-index: 4;
 }
 
-section>h1 {
+.title>h1 {
   width: 20px;
   word-wrap: break-word;
   text-align: center;
@@ -27,10 +27,9 @@ section>h1 {
 }
 
 footer{
-  position: relative;
   height: 6rem;
   display: flex;
-  justify-content:space-between;
+  justify-content:flex-end;
   align-items: center;
   padding-left: 4rem;
   padding-right: 4rem;

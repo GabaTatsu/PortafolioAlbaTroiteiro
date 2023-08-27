@@ -19,6 +19,18 @@ header>aside>{
   display: flex;
   justify-content: left;
 }
+header>aside>div:nth-child(3){
+  display: flex;
+  align-items: center;
+}
+header>aside>div:nth-child(3) a{
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+header>aside>div:nth-child(3) img{
+  height: 15px;
+}
 header>aside>div img{
   width: 15px;
   transform: rotate(-90deg);
@@ -35,14 +47,3 @@ header>aside>div:last-child img{
     opacity: 1;
   }
 }
-@keyframes doblar {
-  0% {
-    transform: rotate(0deg);
-    transform-origin: left bottom;
-  }
-  100% {
-    transform: rotate(45deg);
-      transform-origin: left bottom;
-  }
-}
-

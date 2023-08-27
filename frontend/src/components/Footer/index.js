@@ -11,7 +11,6 @@ const Footer = () => {
 
     return (
       <footer>
-      <p>Pie de página</p>
       {!loggedUser && show && <LoginForm setShow={setShow}></LoginForm>}
       <div>
         {loggedUser ? (

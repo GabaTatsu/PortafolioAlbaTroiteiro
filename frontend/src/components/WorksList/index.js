@@ -3,7 +3,7 @@ import Work from "../Work";
 
 const WorksList = ({ works, deleteWork, reorder }) => {
   return (
-    <ul>
+    <ul className="worklist">
       {works.map((work) => {
         return (
           <li key={work.id}>
