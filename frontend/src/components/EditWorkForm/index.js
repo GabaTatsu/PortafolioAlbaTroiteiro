@@ -60,7 +60,8 @@ const EditWorkForm = ({id, deleteWork, setEditTitle, editTitle, setEditDescripti
                   setEditDescription(description);
                 }
                 if (newImage) {
-                  setEditImage(newImage);
+                  setEditImage(body.data);
+                  setNewImage("")
                 }
                 if (newCategory !== category) {                  
                   deleteWork(id);
@@ -100,6 +101,7 @@ const EditWorkForm = ({id, deleteWork, setEditTitle, editTitle, setEditDescripti
               >
                 <option value="0">RETRATO</option>
                 <option value="1">TRABAJO</option>
+                <option value="2">DIBUJO</option>
               </select>
                <label htmlFor="image">
         {!newImage && (

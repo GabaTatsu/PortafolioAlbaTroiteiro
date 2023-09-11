@@ -8,7 +8,7 @@ const getUser = async (req, res, next) => {
         connection = await getDB();
         const { idUser } = req.params;
         const [[user]] = await connection.query(
-            `SELECT username, id FROM user WHERE id = ?`,
+            `SELECT username, id, userimage FROM user WHERE id = ?`,
             [idUser]
         );
 

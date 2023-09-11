@@ -18,13 +18,14 @@ const Footer = () => {
             <img src={editIcon} alt="EDITAR"></img>
           </Link>
         ) : (
-          <button
+          <button 
+            className="noButton"
             type="button"
             onClick={() => {
               setShow(!show);
             }}
           >
-            <img src={editIcon} alt="EDITAR"></img>
+            <div></div>
           </button>
         )}
         {loggedUser && <Logout ></Logout>}

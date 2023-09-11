@@ -8,8 +8,11 @@ import AboutMes from "./pages/AboutMes";
 import Edit from "./pages/Edit"
 import Footer from "./components/Footer";
 import { CustomTokenContextProvider } from "./components/Contexts/TokenContext";
+import Drawings from "./pages/Drawings";
 
 function App() {
+document.title = "Alba Troiteiro";
+
   return (
     <BrowserRouter>
     <CustomTokenContextProvider>
@@ -19,6 +22,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Works />} />
           <Route path="/Portraits" element={<Portraits />} />
+          <Route path="/Drawings" element={<Drawings />} />
           <Route path="/AboutMe" element={<AboutMes/>} />
           <Route path="/Edit" element={<Edit />} />
           <Route path="*" element={<Works />} />

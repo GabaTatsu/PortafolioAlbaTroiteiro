@@ -1,32 +1,32 @@
 import { useState } from "react";
 import { useTokenContext } from "../Contexts/TokenContext";
 
-const AlertDeleteWork = ({id, title, deleteWork}) =>{
-    const [alertDeleteLink, setAlertDeleteLink] = useState(false);
+const AlertDeleteAboutMe = ({id, deleteAboutMe}) =>{
+    const [alertDeleteAboutMe, setAlertDeleteAboutMe] = useState(false);
     const { token } = useTokenContext();
 
   return (
     <>
-      {alertDeleteLink === false && (
+      {alertDeleteAboutMe === false && (
         <button
           onClick={() => {
-            setAlertDeleteLink(true);
+            setAlertDeleteAboutMe(true);
           }}
         >
           Borrar
         </button>
       )}
-      {alertDeleteLink === true && (
+      {alertDeleteAboutMe === true && (
 
           <article className="alertdelete">
-              <p>¿Seguro que quieres borrar el enlace con título: {title}?</p>
+              <p>¿Seguro que quieres borrar el registro?</p>
               <aside>
                 <button
                   onClick={async (event) => {
                     try {
                       event.preventDefault();
                       const res = await fetch(
-                        `${process.env.REACT_APP_API_URL}/works/delete/${id}`,
+                        `${process.env.REACT_APP_API_URL}/aboutme/delete/${id}`,
                         {
                           method: "DELETE",
                           headers: {
@@ -39,8 +39,8 @@ const AlertDeleteWork = ({id, title, deleteWork}) =>{
                       if (!res.ok) {
                         throw new Error(body.message);
                       }
-                      deleteWork(id);
-                      setAlertDeleteLink(false);
+                      deleteAboutMe(id);
+                      setAlertDeleteAboutMe(false);
                     } catch (error) {
                       console.error(error.message);
                     } finally {
@@ -51,7 +51,7 @@ const AlertDeleteWork = ({id, title, deleteWork}) =>{
                 </button>
                 <button
                   onClick={() => {
-                    setAlertDeleteLink(false);
+                    setAlertDeleteAboutMe(false);
                   }}
                 >
                   Cancelar
@@ -63,4 +63,4 @@ const AlertDeleteWork = ({id, title, deleteWork}) =>{
   );
 };
 
-export default AlertDeleteWork;
+export default AlertDeleteAboutMe;

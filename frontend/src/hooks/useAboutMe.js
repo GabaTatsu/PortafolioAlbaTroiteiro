@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 
 const useAboutMe = () => {
   const [aboutMes, setAboutMes] = useState([]);
-  const [contact, setContact] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -14,7 +13,6 @@ const useAboutMe = () => {
         const body = await res.json();
 
         setAboutMes(body.data.aboutMe);
-        setContact(body.data.contact[0])
         if (!res.ok) {
           throw new Error(body.message);
         }
@@ -27,6 +25,18 @@ const useAboutMe = () => {
     fetchAboutMe();
   }, []);
 
-  return { aboutMes, contact, loading };
+  const deleteAboutMe = (id) => {
+    const indexToDelete = aboutMes.findIndex((aboutMe) => {
+      return aboutMe.id === id;
+    });
+    aboutMes.splice(indexToDelete, 1);
+    setAboutMes([...aboutMes]);
+  };
+  const adAboutMe = ({ newObject }) => {
+    setAboutMes([...aboutMes, newObject]);
+  };
+
+
+  return { aboutMes, deleteAboutMe, adAboutMe, loading };
 };
 export default useAboutMe;

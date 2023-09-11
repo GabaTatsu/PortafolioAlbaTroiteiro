@@ -1,18 +1,14 @@
-import "./style.css";
 import AboutMe from "../AboutMe";
-import logoTroiteiro from "../../assets/icons/logotroiteiro.jpg";
+import "./style.css";
 
-const AboutMeList = ({ aboutMes }) => {
+const AboutMeList = ({ aboutMes, deleteAboutMe }) => {
+
     return (
-      <ul className="aboutme">
-        <img
-        src={logoTroiteiro}
-        alt="Casa Troiteiro"
-        ></img>
+      <ul className="aboutme">        
         {aboutMes.map((aboutMe) => {
           return (
             <li key={aboutMe.id}>
-              <AboutMe aboutMe={aboutMe}/>
+              <AboutMe aboutMe={aboutMe} deleteAboutMe={deleteAboutMe}/>
             </li>
           );
         })}

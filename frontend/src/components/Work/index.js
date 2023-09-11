@@ -27,6 +27,7 @@ const Work = ({ work, deleteWork, reorder }) => {
       <p>{createdAt.split("T")[0]}</p>
       {category === 0 && <p>RETRATO</p>}
       {category === 1 && <p>TRABAJO</p>}
+      {category === 2 && <p>DIBUJO</p>}
       <p>ORDEN:{orderer}º</p>
       <ChangeOrder id={id} reorder={reorder}></ChangeOrder>
       <AlertDeleteWork id={id} title={title} deleteWork={deleteWork}></AlertDeleteWork>

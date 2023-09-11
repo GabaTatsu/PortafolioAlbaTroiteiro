@@ -5,11 +5,16 @@ import useUser from "../../hooks/UseUser";
 import EditWork from "../../components/EditWork";
 import EditPortrait from "../../components/EditPortrait";
 import { useState } from "react";
+import useAboutMe from "../../hooks/useAboutMe";
+import AboutMeList from "../../components/AboutMeList";
+import Contact from "../../components/Contact";
+import NewAboutMeForm from "../../components/NewAboutMeForm";
 
 const Edit = () => {
     const { loggedUser } = useTokenContext();
     const { user, setUser} = useUser();
     const [changeWorks, setChangeWorks] = useState("RETRATOS");
+    const { aboutMes, deleteAboutMe, adAboutMe } = useAboutMe();
 
     return (
         <>
@@ -31,6 +36,10 @@ const Edit = () => {
                     {changeWorks === "RETRATOS" && <EditWork></EditWork>}
                     {changeWorks === "TRABAJOS" && <EditPortrait></EditPortrait>}                
                 </div>
+                <h3>SOBRE MI</h3>
+                <NewAboutMeForm adAboutMe={adAboutMe}></NewAboutMeForm>
+                <AboutMeList aboutMes={aboutMes} deleteAboutMe={deleteAboutMe}/>
+                <Contact></Contact>
             </>
             )}
             {!loggedUser && (

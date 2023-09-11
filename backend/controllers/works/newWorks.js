@@ -47,7 +47,7 @@ const newWorks = async (req, res, next) => {
 
         res.send({
             status: 'Ok',
-            message: 'Enlace insertado con éxito!',
+            message: 'Trabajo insertado con éxito!',
             data: { imageName, newId: lastId[0].maxId},
         });
     } catch (error) {

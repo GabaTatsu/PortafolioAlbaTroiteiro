@@ -19,16 +19,16 @@ header>aside>{
   display: flex;
   justify-content: left;
 }
-header>aside>div:nth-child(3){
+header>aside>div:nth-child(4){
   display: flex;
   align-items: center;
 }
-header>aside>div:nth-child(3) a{
+header>aside>div:nth-child(4) a{
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
 }
-header>aside>div:nth-child(3) img{
+header>aside>div:nth-child(4) img{
   height: 15px;
 }
 header>aside>div img{

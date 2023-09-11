@@ -1,5 +1,5 @@
 const getDB = require('../../db/getDB');
-const { generateError } = require('../../helpers');
+const { generateError, deletePhoto, savePhoto } = require('../../helpers');
 const bcrypt = require('bcrypt');
 
 const editUserAvatar = async (req, res, next) => {
@@ -9,8 +9,9 @@ const editUserAvatar = async (req, res, next) => {
         connection = await getDB();
 
         const { username, oldPass, newPass } = req.body;
+        const userImage = req.files?.userimage;
 
-        if (!(username || oldPass || newPass)) {
+        if (!(username || oldPass || newPass || userImage)) {
             throw generateError('No se ha introducido ningún dato', 400);
         }
 
@@ -38,6 +39,22 @@ const editUserAvatar = async (req, res, next) => {
 
         const [user] = await connection.query(`SELECT * FROM user`);
 
+        if (user.length < 1) {
+            throw generateError('No existe el usuario seleccionado', 404);
+        }
+
+        let imageName;
+        if (userImage) {
+            if (user[0].userimage) {
+                await deletePhoto(user[0].userimage);
+            }
+            imageName = await savePhoto(userImage);
+            await connection.query(`UPDATE user SET userimage = ? WHERE id = ?`, [
+                imageName,
+                1,
+            ]);
+        }   
+
         if (username) {
             await connection.query(`UPDATE user SET username = ?`, [username]);
         }
@@ -59,6 +76,7 @@ const editUserAvatar = async (req, res, next) => {
         res.send({
             status: 'Ok',
             message: 'Datos del usuario modificados con éxito',
+            data: imageName,
         });
     } catch (error) {
         next(error);

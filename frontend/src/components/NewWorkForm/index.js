@@ -1,13 +1,14 @@
 import { useTokenContext } from "../Contexts/TokenContext";
 import { useState, useRef } from "react";
+import Imagen from "../Imagen";
 
 const NewWorkForm = ({adWork}) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
-  const [image, setImage] = useState("");
+  const [imageNewWork, setImageNewWork] = useState("");
   const { token } = useTokenContext();
-  const newImageRef = useRef();
+  const newImageWorkRef = useRef();
 
   return (
     <>
@@ -15,7 +16,7 @@ const NewWorkForm = ({adWork}) => {
         onSubmit={async (event) => {
           try {
             event.preventDefault();
-            const file = newImageRef.current.files[0];
+            const file = newImageWorkRef.current.files[0];
 
             if (file && title && category) {
                   const formData = new FormData();
@@ -51,8 +52,8 @@ const NewWorkForm = ({adWork}) => {
                   idUser: 1,
                 };
 
-                adWork({newObject})
-
+                adWork({newObject}); 
+                setImageNewWork("")
               }
               } catch (error) {
                 console.error(error.message);
@@ -86,18 +87,24 @@ const NewWorkForm = ({adWork}) => {
               >
                 <option value="0">RETRATO</option>
                 <option value="1">TRABAJO</option>
+                <option value="2">DIBUJO</option>
               </select>
-              <label htmlFor="image">
-          <img src={image} alt="previo"></img>
+              <label htmlFor="imageNewWork">
+              {!imageNewWork && (
+          <Imagen image={imageNewWork} title={title} />
+        )}
+        {imageNewWork && (
+          <img src={imageNewWork} alt={title} />
+        )}
       </label>
       <input
-        id="image"
+        id="imageNewWork"
         type="file"
         hidden
-        ref={newImageRef}
+        ref={newImageWorkRef}
         onChange={() => {
-          const file = newImageRef.current.files[0];
-          setImage(URL.createObjectURL(file));
+          const file = newImageWorkRef.current.files[0];
+          setImageNewWork(URL.createObjectURL(file));
         }}
       />
         <button>Publicar trabajo</button>

@@ -9,7 +9,7 @@ const NavBar = () => {
   const [ redirect, setRedirect ] = useState("/");
 
   useEffect(() => {
-    if (location.pathname === "/Portraits" || location.pathname === "/AboutMe" || location.pathname === "/Edit") {
+    if (location.pathname === "/Portraits" || location.pathname === "/AboutMe" || location.pathname === "/Drawings" || location.pathname === "/Edit") {
       setRedirect(location.pathname);
     } else {
       setRedirect("/");
@@ -33,6 +33,14 @@ const NavBar = () => {
           )}
           <Link to="/Portraits" >
             RETRATOS
+          </Link>
+        </div>
+        <div>
+          {redirect === "/Drawings" && (
+            <img src={arrowIcon} alt="DIBUJOS"></img>
+          )}
+          <Link to="/Drawings" >
+            DIBUJOS
           </Link>
         </div>
         <div>

@@ -51,11 +51,14 @@ const changeOrder = require('./controllers/works/changeOrder');
 
 /**
  * ##############################
- * ### CONTROLADORES DE ABOUTME ###
+ * ### CONTROLADORES DE ABOUT ME ###
  * ##############################
  */
 
 const getAboutMe = require('./controllers/aboutMe/getAboutMe');
+const deleteAboutMe = require('./controllers/aboutMe/deleteAboutMe');
+const editAboutMe = require('./controllers/aboutMe/editAboutMe');
+const newAboutMe = require('./controllers/aboutMe/newAboutMe');
 
 /**
  * #############################
@@ -81,11 +84,14 @@ app.put('/works/order/:idWork', isAuth, changeOrder);
 
 /**
  * ##########################
- * ### ENDPOINTS DE ABOUTME ###
+ * ### ENDPOINTS DE ABOUT ME ###
  * ##########################
  */
 
 app.get('/aboutme', getAboutMe);
+app.delete('/aboutme/delete/:idAboutMe', isAuth, deleteAboutMe);
+app.put('/aboutme/edit/:idAboutMe', isAuth, editAboutMe);
+app.post('/aboutme/new', isAuth, newAboutMe);
 
 //////////////////////
 

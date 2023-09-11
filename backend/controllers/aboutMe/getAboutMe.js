@@ -15,17 +15,9 @@ const getAboutMe = async (req, res, next) => {
             throw generateError('No existe ningún registro sobre mi', 404);
         }
 
-        const [contact] = await connection.query(
-            `SELECT * FROM contact`
-        );
-
-        if (!contact) {
-            throw generateError('No existe ningún registro de conatcto', 404);
-        }
-
         res.send({
             status: 'Ok',
-            data: {aboutMe, contact},
+            data: {aboutMe},
         });
     } catch (error) {
         next(error);

@@ -8,6 +8,41 @@ main{
   margin-left: 7.3rem;
   margin-right: 3.3rem;
   z-index: 5;
+  display: flex;
+  flex-direction:column;
+  align-items: center;
+}
+main>img{
+  max-width: 10%;
+}
+main>div {
+  display: flex;
+}
+main>div>aside {
+  margin-left: 3%;
+  position: fixed;
+  transform: translate(-30%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+main>div>aside>img{
+  max-width: 30%;
+}
+main>div>aside>article img{
+  max-width: 2rem;
+}
+main>div>aside>article>section{
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+main>div>aside>article>h4 {
+  margin: 1rem;
+}
+main>div>aside>article a {
+  text-decoration: none;
+  color: black;
 }
 .title{
 display: flex;
@@ -39,20 +74,36 @@ footer{
 footer img{
   width: 30px;
 }
-footer form{
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background-color: #32a1ce;
-  width: 15em;
-  height: 5.8rem;
+.alertdelete{
   display: flex;
   flex-direction: column;
+  position: absolute;
+  z-index: 4;
+  background-color: white;
+  color: black;
+  width: 20rem;
   align-items: center;
+  padding: 1rem;
+  gap: 0.2rem;
+}
+.alertdelete p{
+  text-align:center;
+}
+.alertdelete aside{
+  display: flex;
+  gap: 0.3rem;
   justify-content: center;
-  border-radius: 10% / 50%;
-  animation: desplegar 0.3s ease-in-out forwards;
-  z-index: 6;
+}
+.noButton {
+  border: none;
+  background: transparent;
+}
+.noButton:hover {
+  cursor: pointer;
+}
+.noButton div{
+  width: 2rem;
+  height: 2rem;
 }
 
 @keyframes desplegar {

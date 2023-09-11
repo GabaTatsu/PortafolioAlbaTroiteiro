@@ -1,15 +1,25 @@
-const AboutMe = ({aboutMe}) => {
+import AlertDeleteAboutMe from "../AlertDeleteAboutMe";
+import { useTokenContext } from "../Contexts/TokenContext";
+import EditAboutMeForm from "../EditAboutMeForm";
+import { useState } from "react";
 
-    const { imageaboutme, descriptionaboutme} = aboutMe;
+const AboutMe = ({aboutMe, deleteAboutMe}) => {
+  const { loggedUser } = useTokenContext();
+  const { descriptionaboutme } = aboutMe;
+  const [descriptionAboutMe, setDescriptionAboutMe] = useState(descriptionaboutme);   
 
     return(
-       <article>
-        <img
-          src={`${process.env.REACT_APP_API_URL}/${imageaboutme}`}
-          alt={imageaboutme}
-        ></img>
-        <section>{descriptionaboutme}</section>
+      <>
+       <article>  
+        {loggedUser && (
+          <>
+          <EditAboutMeForm descriptionAboutMe={descriptionAboutMe} setDescriptionAboutMe={setDescriptionAboutMe} id={aboutMe.id} ></EditAboutMeForm>
+        <AlertDeleteAboutMe id={aboutMe.id} deleteAboutMe={deleteAboutMe}></AlertDeleteAboutMe>
+        </>
+        )}
        </article>
+       <p dangerouslySetInnerHTML={{ __html: descriptionAboutMe }}></p>
+       </>
     )
 }
 
