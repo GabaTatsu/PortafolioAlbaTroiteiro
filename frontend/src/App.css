@@ -19,15 +19,16 @@ main>div {
   display: flex;
 }
 main>div>aside {
-  margin-left: 3%;
   position: fixed;
-  transform: translate(-30%);
+  left: 28%;
+  top: 55%;
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 main>div>aside>img{
-  max-width: 30%;
+  max-width: 40%;
 }
 main>div>aside>article img{
   max-width: 2rem;

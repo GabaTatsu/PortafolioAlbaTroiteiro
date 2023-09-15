@@ -1,0 +1,23 @@
+.addwork {
+    position: fixed;
+    z-index: 20;
+    right: 5%;
+    top: 5%;
+}
+.addwork>button img{
+    max-width: 3rem;
+}
+.addwork form {
+    display: flex;
+    gap: 2rem;
+    background-color: gray;
+    padding: 2rem;
+}
+.addwork>form> article {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.addwork>form img {
+max-width: 20rem;
+}

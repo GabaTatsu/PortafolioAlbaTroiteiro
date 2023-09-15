@@ -1,5 +1,5 @@
 const getDB = require('../../db/getDB');
-const { generateError, deletePhoto, savePhoto } = require('../../helpers');
+const { generateError, deleteFile, saveFile } = require('../../helpers');
 
 const editWorks = async (req, res, next) => {
     let connection;
@@ -28,9 +28,9 @@ const editWorks = async (req, res, next) => {
         let imageName;
         if (imagen) {
             if (works[0].image) {
-                await deletePhoto(works[0].image);
+                await deleteFile(works[0].image);
             }
-            imageName = await savePhoto(imagen);
+            imageName = await saveFile(imagen);
             await connection.query(`UPDATE work SET image = ? WHERE id = ?`, [
                 imageName,
                 idWork,

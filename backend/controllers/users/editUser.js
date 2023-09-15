@@ -1,5 +1,5 @@
 const getDB = require('../../db/getDB');
-const { generateError, deletePhoto, savePhoto } = require('../../helpers');
+const { generateError, deleteFile, saveFile } = require('../../helpers');
 const bcrypt = require('bcrypt');
 
 const editUserAvatar = async (req, res, next) => {
@@ -46,9 +46,9 @@ const editUserAvatar = async (req, res, next) => {
         let imageName;
         if (userImage) {
             if (user[0].userimage) {
-                await deletePhoto(user[0].userimage);
+                await deleteFile(user[0].userimage);
             }
-            imageName = await savePhoto(userImage);
+            imageName = await saveFile(userImage);
             await connection.query(`UPDATE user SET userimage = ? WHERE id = ?`, [
                 imageName,
                 1,

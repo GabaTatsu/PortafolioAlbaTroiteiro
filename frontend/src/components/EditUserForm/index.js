@@ -51,7 +51,6 @@ const EditUserForm = ({ user, setUser }) => {
             }
             setOldPass("");
             setNewPass("");
-            setNewUserImage("");
 
           } catch (error) {
             console.error(error.message);
@@ -59,7 +58,7 @@ const EditUserForm = ({ user, setUser }) => {
           }
         }}
       >
-        
+          <aside>        
           <label htmlFor="username">Nombre de usuario:</label>
           <input
             id="username"
@@ -79,8 +78,6 @@ const EditUserForm = ({ user, setUser }) => {
                 setOldPass(event.target.value);
               }}
             />
-
-
             <label htmlFor="newPass">Nueva contraseña:</label>
             <input
               id="newPass"
@@ -90,8 +87,9 @@ const EditUserForm = ({ user, setUser }) => {
                 setNewPass(event.target.value);
               }}
             />
-
-<label htmlFor="userimage">
+            <button type="submit">Guardar Cambios</button>
+          </aside> 
+            <label htmlFor="userimage">
         {!newUserImage && (
           <Imagen image={user.userimage} title={username || user.username} />
         )}
@@ -109,8 +107,6 @@ const EditUserForm = ({ user, setUser }) => {
           setNewUserImage(URL.createObjectURL(file));
         }}
       />
-  
-          <button type="submit">Guardar Cambios</button>
       </form>
     );
   };

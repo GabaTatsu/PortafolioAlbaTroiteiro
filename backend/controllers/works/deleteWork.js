@@ -1,5 +1,5 @@
 const getDB = require('../../db/getDB');
-const { generateError, deletePhoto } = require('../../helpers');
+const { generateError, deleteFile } = require('../../helpers');
 
 const deleteWork = async (req, res, next) => {
     let connection;
@@ -27,7 +27,7 @@ const deleteWork = async (req, res, next) => {
         );
 
         if (works[0].image) {
-            await deletePhoto(works[0].image);
+            await deleteFile(works[0].image);
         }
 
         await connection.query(`DELETE FROM work WHERE id = ?`, [idWork]);

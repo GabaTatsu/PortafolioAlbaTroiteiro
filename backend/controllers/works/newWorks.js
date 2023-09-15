@@ -1,5 +1,5 @@
 const getDB = require('../../db/getDB');
-const { generateError, savePhoto } = require('../../helpers');
+const { generateError, saveFile } = require('../../helpers');
 
 const newWorks = async (req, res, next) => {
     let connection;
@@ -25,7 +25,7 @@ const newWorks = async (req, res, next) => {
         }
 
         let imageName;
-        imageName = await savePhoto(image);
+        imageName = await saveFile(image);
 
         const [lastOrderer] = await connection.query(
             `SELECT MAX(orderer) as maxOrderer FROM work WHERE category = ?`,
