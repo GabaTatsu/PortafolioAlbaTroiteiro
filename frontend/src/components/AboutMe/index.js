@@ -13,7 +13,7 @@ const AboutMe = ({aboutMe, deleteAboutMe}) => {
        <article>  
         {loggedUser && (
           <>
-          <EditAboutMeForm descriptionAboutMe={descriptionAboutMe} setDescriptionAboutMe={setDescriptionAboutMe} id={aboutMe.id} ></EditAboutMeForm>
+          <EditAboutMeForm setDescriptionAboutMe={setDescriptionAboutMe} id={aboutMe.id} ></EditAboutMeForm>
         <AlertDeleteAboutMe id={aboutMe.id} deleteAboutMe={deleteAboutMe}></AlertDeleteAboutMe>
         </>
         )}

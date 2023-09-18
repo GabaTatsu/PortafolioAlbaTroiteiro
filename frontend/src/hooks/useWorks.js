@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { AlertContext } from "../components/Contexts/AlertContext";
 
 const useWorks = ({workType}) => {
   const [works, setWorks] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { setAlert } = useContext(AlertContext);
 
   useEffect(() => {
     const fetchWorks = async () => {
@@ -12,12 +14,17 @@ const useWorks = ({workType}) => {
 
         const body = await res.json();
 
-        setWorks(body.data);
         if (!res.ok) {
           throw new Error(body.message);
         }
+
+        setWorks(body.data);
+        setAlert({ type: "success", msg: body.message });
+
       } catch (error) {
         console.error(error.message);
+        setAlert({ type: "error", msg: error.message });
+        
       } finally {
         setLoading(false);
       }
@@ -90,6 +97,6 @@ const useWorks = ({workType}) => {
   };
 
 
-  return { works, loading, deleteWork, reorder, adWork};
+  return { works, loading, setLoading, deleteWork, reorder, adWork};
 };
 export default useWorks;

@@ -107,6 +107,34 @@ footer img{
   height: 2rem;
 }
 
+.alert {
+  position: fixed;
+  left: 50vw;
+  bottom: 3rem;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  padding: 1rem 2rem;
+  gap: 1rem;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+}
+
+.alert img {
+  width: 2rem;
+  height: 2rem;
+}
+
+.alert.success {
+  background: green;
+}
+.alert.error {
+  background-color: rgb(252, 231, 231);
+  color: red;
+  box-shadow: rgb(42, 39, 39);
+}
+
 @keyframes desplegar {
   0% {
     opacity: 0;

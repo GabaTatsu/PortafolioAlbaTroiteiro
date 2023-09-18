@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { AlertContext } from "../components/Contexts/AlertContext";
 
 const useAboutMe = () => {
   const [aboutMes, setAboutMes] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { setAlert } = useContext(AlertContext);
 
   useEffect(() => {
     const fetchAboutMe = async () => {
@@ -12,12 +14,17 @@ const useAboutMe = () => {
 
         const body = await res.json();
 
-        setAboutMes(body.data.aboutMe);
         if (!res.ok) {
           throw new Error(body.message);
         }
+
+        setAboutMes(body.data.aboutMe);
+        setAlert({ type: "success", msg: body.message });
+
       } catch (error) {
         console.error(error.message);
+        setAlert({ type: "error", msg: error.message });
+        
       } finally {
         setLoading(false);
       }

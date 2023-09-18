@@ -1,6 +1,8 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
 import { useTokenContext } from "../Contexts/TokenContext";
 import Imagen from "../Imagen";
+import { AlertContext } from "../Contexts/AlertContext";
+import Spinner from "../Spinner";
 
 const EditUserForm = ({ user, setUser }) => {
     const [username, setUsername] = useState("");
@@ -9,15 +11,17 @@ const EditUserForm = ({ user, setUser }) => {
     const [newUserImage, setNewUserImage] = useState();
     const newUserImageRef = useRef();
     const { token } = useTokenContext();
+    const [loading, setLoading] = useState(false);
+    const { setAlert } = useContext(AlertContext);
 
     return (
       <form
         onSubmit={async (event) => {
           try {
             event.preventDefault();
+            setLoading(true);
             const file = newUserImageRef.current.files[0];
   
-            if ( file || username || oldPass || newPass) {
               const formData = new FormData();
 
                   formData.append("userimage", file);
@@ -48,13 +52,16 @@ const EditUserForm = ({ user, setUser }) => {
                 password: newPass || user.password,
                 userimage: newUserImage || user.userimage,
               });
-            }
+            
             setOldPass("");
             setNewPass("");
+            setAlert({ type: "success", msg: body.message });
 
           } catch (error) {
             console.error(error.message);
+            setAlert({ type: "error", msg: error.message });
           } finally {
+            setLoading(false);
           }
         }}
       >
@@ -107,6 +114,7 @@ const EditUserForm = ({ user, setUser }) => {
           setNewUserImage(URL.createObjectURL(file));
         }}
       />
+      {loading && <Spinner />}
       </form>
     );
   };

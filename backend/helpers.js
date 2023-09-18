@@ -2,9 +2,12 @@ const { unlink } = require('fs/promises');
 const path = require('path');
 const sharp = require('sharp');
 const uuid = require('uuid');
-const ffmpeg = require('fluent-ffmpeg');
+const { spawn } = require('child_process');
+const { promisify } = require('util');
 
 const filesDir = path.join(__dirname, 'static');
+
+const exec = promisify(spawn);
 
 function generateError(message, code) {
     const error = new Error(message);
@@ -25,7 +28,7 @@ async function deleteFile(fileName) {
 }
 
 async function saveFile(fileName) {
-    const fileExtension = path.extname(fileName.originalname).toLowerCase();
+    const fileExtension = path.extname(fileName.name).toLowerCase();
 
     if (['.jpg', '.jpeg', '.png', '.gif', '.webp', '.tiff', '.tif', '.bmp', '.svg'].includes(fileExtension)) {
 
@@ -62,26 +65,24 @@ async function saveImage(imagen) {
 async function saveVideo(video) {
     try {
         const videoName = uuid.v4() + '.mp4';
-        const videoPath = path.join(filesDir, videoName);
+        const videoOutputPath = path.join(filesDir, videoName);
+        const videoPath = path.join(filesDir, video.name);
 
+        const ffmpegCmd = [
+            '-i', videoPath,
+            '-vf', 'scale=1200:1200',
+            '-c:v', 'h264',
+            '-pix_fmt', 'yuv420p',
+            '-movflags', '+faststart',
+            videoOutputPath,
+        ];
 
-        ffmpeg()
-            .input(video.buffer)
-            .inputFormat('mp4', 'avi', 'mov', 'mkv', 'wmv', 'flv', 'webm', 'mpeg', 'mpg')
-            .outputOptions([
-                `-vf "scale=1200:1200"`,
-                '-c:v h264',
-                '-pix_fmt yuv420p',
-                '-movflags +faststart'
-            ])
-            .toFormat('mp4') 
-            .on('end', () => {
-                console.log('Procesamiento de video completado');
-            })
-            .on('error', (err) => {
-                throw new Error('Error al procesar el video');
-            })
-            .save(videoPath);
+        const { error } = await exec('ffmpeg', ffmpegCmd);
+
+        if (error) {
+            console.error('Error al procesar el video:', error.message);
+            throw new Error('Error al procesar el video');
+        }
 
         return videoName;
     } catch (error) {

@@ -1,8 +1,10 @@
 import { useTokenContext } from "../Contexts/TokenContext";
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
 import Imagen from "../Imagen";
 import addIcon from "../../assets/icons/icons8-plus-144.png"
 import "./style.css";
+import Spinner from "../Spinner";
+import { AlertContext } from "../Contexts/AlertContext";
 
 const NewWorkForm = ({works, adWork}) => {
   const [title, setTitle] = useState("");
@@ -12,6 +14,8 @@ const NewWorkForm = ({works, adWork}) => {
   const [showNewWork, setShowNewWork] = useState(false);
   const { token , loggedUser } = useTokenContext();
   const newImageWorkRef = useRef();
+  const [loading, setLoading] = useState(false);
+  const { setAlert } = useContext(AlertContext);
 
   return (
     <div className="addwork">
@@ -30,6 +34,7 @@ const NewWorkForm = ({works, adWork}) => {
         onSubmit={async (event) => {
           try {
             event.preventDefault();
+            setLoading(true);
             const file = newImageWorkRef.current.files[0];
 
                   const formData = new FormData();
@@ -65,7 +70,8 @@ const NewWorkForm = ({works, adWork}) => {
                     category,
                     idUser: 1,
                   };
-                  adWork({newObject}); 
+                  adWork({newObject});
+                   
                 } else {
                   if (category === 0){
                     window.location.href = "/Portraits";
@@ -80,9 +86,14 @@ const NewWorkForm = ({works, adWork}) => {
                 setDescription("");
                 setCategory(0);
                 setImageNewWork("");
+                setShowNewWork(false)
+                setAlert({ type: "success", msg: body.message });
+
               } catch (error) {
                 console.error(error.message);
+                setAlert({ type: "error", msg: error.message });
               } finally {
+                setLoading(false);
               }
             }}
       >
@@ -145,6 +156,7 @@ const NewWorkForm = ({works, adWork}) => {
       />
       </form>
       )}
+      {loading && <Spinner />}
       </div>
   );
 };

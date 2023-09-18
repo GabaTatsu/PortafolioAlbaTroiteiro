@@ -1,12 +1,16 @@
 import "./style.css";
 import flechas from "../../assets/icons/down-arrow.png";
 import { useTokenContext } from "../Contexts/TokenContext";
+import { useContext } from "react";
+import { AlertContext } from "../Contexts/AlertContext";
 
-const ChangeOrder = ({id, reorder})=>{
+const ChangeOrder = ({id, reorder, setLoading})=>{
     const { token } = useTokenContext();
+    const { setAlert } = useContext(AlertContext);
 
     const sendOrderDirection = async (ordererDirection) => {
         try {
+          setLoading(true);
           const res = await fetch(
             `${process.env.REACT_APP_API_URL}/works/order/${id}`,
             {
@@ -23,8 +27,13 @@ const ChangeOrder = ({id, reorder})=>{
           if (!res.ok) {
             throw new Error(body.message);
           }
+
+          setAlert({ type: "success", msg: body.message });
         } catch (error) {
           console.error(error.message);
+          setAlert({ type: "error", msg: error.message });
+        } finally{
+          setLoading(false);
         }
       };    
 

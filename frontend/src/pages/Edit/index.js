@@ -3,10 +3,11 @@ import { useTokenContext } from "../../components/Contexts/TokenContext";
 import EditUserForm from "../../components/EditUserForm";
 import useUser from "../../hooks/UseUser";
 import "./style.css";
+import Spinner from "../../components/Spinner";
 
 const Edit = () => {
     const { loggedUser } = useTokenContext();
-    const { user, setUser} = useUser();
+    const { user, setUser, loading} = useUser();
 
     return (
         <>
@@ -19,6 +20,7 @@ const Edit = () => {
             {!loggedUser && (
         <p>INICIA SESIÓN PARA ACCEDER A ESTA SECCIÓN</p>
             )}
+            {loading && <Spinner />}
         </>
     );
   };

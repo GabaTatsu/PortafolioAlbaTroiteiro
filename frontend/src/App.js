@@ -8,7 +8,9 @@ import AboutMes from "./pages/AboutMes";
 import Edit from "./pages/Edit"
 import Footer from "./components/Footer";
 import { CustomTokenContextProvider } from "./components/Contexts/TokenContext";
+import { CustomAlertContextProvider } from "./components/Contexts/AlertContext";
 import Drawings from "./pages/Drawings";
+import Alert from "./components/Alert";
 
 function App() {
 document.title = "Alba Troiteiro";
@@ -16,6 +18,7 @@ document.title = "Alba Troiteiro";
   return (
     <BrowserRouter>
     <CustomTokenContextProvider>
+    <CustomAlertContextProvider>
       <Header></Header>
       <Title></Title>
       <main>
@@ -28,7 +31,9 @@ document.title = "Alba Troiteiro";
           <Route path="*" element={<Works />} />
         </Routes>
       </main>
+      <Alert></Alert>
       <Footer></Footer>
+      </CustomAlertContextProvider>
       </CustomTokenContextProvider>
     </BrowserRouter>
   );

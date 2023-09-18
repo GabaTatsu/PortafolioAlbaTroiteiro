@@ -1,8 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { AlertContext } from "../components/Contexts/AlertContext";
 
 const useUser = () => {
   const [user, setUser] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const { setAlert } = useContext(AlertContext);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -19,8 +21,12 @@ const useUser = () => {
         }
 
         setUser(body.data);
+        setAlert({ type: "success", msg: body.message });
+
       } catch (error) {
         console.error(error.message);
+        setAlert({ type: "error", msg: error.message });
+        
       } finally {
         setLoading(false);
       }

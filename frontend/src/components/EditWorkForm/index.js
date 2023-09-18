@@ -1,7 +1,9 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
 import "./style.css";
 import { useTokenContext } from "../Contexts/TokenContext";
 import Imagen from "../Imagen";
+import { AlertContext } from "../Contexts/AlertContext";
+import Spinner from "../Spinner";
 
 const EditWorkForm = ({id, deleteWork, setEditTitle, editTitle, setEditDescription, editDescription, setEditImage, editImage, setEditWorkForm, editWorkForm, category}) => {
   const { token } = useTokenContext();
@@ -10,6 +12,8 @@ const EditWorkForm = ({id, deleteWork, setEditTitle, editTitle, setEditDescripti
   const [newImage, setNewImage] = useState();
   const [newCategory, setNewCategory] = useState(category);
   const newImageRef = useRef();
+  const [loading, setLoading] = useState(false);
+  const { setAlert } = useContext(AlertContext);
 
   return (
     <div className="editform">
@@ -27,9 +31,10 @@ const EditWorkForm = ({id, deleteWork, setEditTitle, editTitle, setEditDescripti
             onSubmit={async (event) => {
               try {
                 event.preventDefault();
+                setLoading(true);
                 const file = newImageRef.current.files[0];
 
-                if (file || title || description) {
+            
                   const formData = new FormData();
 
                   formData.append("imagen", file);
@@ -68,10 +73,13 @@ const EditWorkForm = ({id, deleteWork, setEditTitle, editTitle, setEditDescripti
                 }
 
                 setEditWorkForm(false);
-              }
+                setAlert({ type: "success", msg: body.message });
+              
               } catch (error) {
                 console.error(error.message);
+                setAlert({ type: "error", msg: error.message });
               } finally {
+                setLoading(false);
               }
             }}
           >            
@@ -132,6 +140,7 @@ const EditWorkForm = ({id, deleteWork, setEditTitle, editTitle, setEditDescripti
         </button>
         </form>
       )}
+      {loading && <Spinner />}
       </div>
  
   );

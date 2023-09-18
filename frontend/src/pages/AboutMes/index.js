@@ -4,13 +4,17 @@ import useAboutMe from "../../hooks/useAboutMe";
 import useUser from "../../hooks/UseUser";
 import Imagen from "../../components/Imagen";
 import logoTroiteiro from "../../assets/icons/logotroiteiro.jpg";
+import Spinner from "../../components/Spinner";
+import NewAboutMeForm from "../../components/NewAboutMeForm";
 
 const AboutMes = () => {  
-  const { aboutMes, deleteAboutMe } = useAboutMe();
+  const { aboutMes, deleteAboutMe, adAboutMe, loading } = useAboutMe();
   const { user } = useUser();
 
   return (
     <>
+    <NewAboutMeForm adAboutMe={adAboutMe}></NewAboutMeForm>
+    {loading && <Spinner />}
     <img
         src={logoTroiteiro}
         alt="Casa Troiteiro"
@@ -22,8 +26,6 @@ const AboutMes = () => {
         </aside>      
         <AboutMeList aboutMes={aboutMes} deleteAboutMe={deleteAboutMe}/>
         </div>
-       
-
     </>
   );
   };

@@ -5,7 +5,7 @@ import EditWorkForm from "../EditWorkForm";
 import { useState } from "react";
 import ChangeOrder from "../ChangeOrder";
 
-const Work = ({ work, deleteWork, reorder }) => {
+const Work = ({ work, deleteWork, reorder, setLoading }) => {
   const { loggedUser } = useTokenContext();
   const { title, description, image, id, orderer, category, createdAt} = work;
   const [editTitle, setEditTitle] = useState(title);
@@ -29,7 +29,7 @@ const Work = ({ work, deleteWork, reorder }) => {
       {category === 1 && <p>TRABAJO</p>}
       {category === 2 && <p>DIBUJO</p>}
       <p>ORDEN:{orderer}º</p>
-      <ChangeOrder id={id} reorder={reorder}></ChangeOrder>
+      <ChangeOrder id={id} reorder={reorder} setLoading={setLoading}></ChangeOrder>
       <AlertDeleteWork id={id} title={title} deleteWork={deleteWork}></AlertDeleteWork>
       </>
       )}       

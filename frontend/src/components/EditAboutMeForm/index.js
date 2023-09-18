@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useTokenContext } from "../Contexts/TokenContext";
 import "./style.css";
+import { AlertContext } from "../Contexts/AlertContext";
+import Spinner from "../Spinner";
 
-const EditAboutMeForm = ({ descriptionAboutMe, setDescriptionAboutMe, id }) => {
+const EditAboutMeForm = ({ setDescriptionAboutMe, id }) => {
     const { token } = useTokenContext();
     const [editAboutMeForm, setEditAboutMeForm] = useState(false);
-    const [newDescriptionAboutMe, setNewDescriptionAboutMe] = useState(descriptionAboutMe);
+    const [newDescriptionAboutMe, setNewDescriptionAboutMe] = useState("");
+    const [loading, setLoading] = useState(false);
+    const { setAlert } = useContext(AlertContext);
   
     return (
       <div className="editAboutMeform">
@@ -23,8 +27,8 @@ const EditAboutMeForm = ({ descriptionAboutMe, setDescriptionAboutMe, id }) => {
               onSubmit={async (event) => {
                 try {
                   event.preventDefault();
+                  setLoading(true);
   
-                  if (newDescriptionAboutMe) {
                     const formData = new FormData();
   
                     formData.append("descriptionaboutme", newDescriptionAboutMe);
@@ -49,10 +53,13 @@ const EditAboutMeForm = ({ descriptionAboutMe, setDescriptionAboutMe, id }) => {
                   }
   
                   setEditAboutMeForm(false);
-                }
+                  setAlert({ type: "success", msg: body.message });
+                
                 } catch (error) {
                   console.error(error.message);
+                  setAlert({ type: "error", msg: error.message });
                 } finally {
+                  setLoading(false);
                 }
               }}
             >            
@@ -76,6 +83,7 @@ const EditAboutMeForm = ({ descriptionAboutMe, setDescriptionAboutMe, id }) => {
           </button>
           </form>
         )}
+        {loading && <Spinner />}
         </div>
    
     );

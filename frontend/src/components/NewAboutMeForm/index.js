@@ -1,25 +1,38 @@
 import { useTokenContext } from "../Contexts/TokenContext";
-import { useState, useRef } from "react";
-import Imagen from "../Imagen";
+import { useState, useContext } from "react";
+import addIcon from "../../assets/icons/icons8-plus-144.png"
+import Spinner from "../Spinner";
+import { AlertContext } from "../Contexts/AlertContext";
 
 const NewAboutMeForm = ({adAboutMe}) => {
     const [descriptionAboutMe, setDescriptionAboutMe] = useState("");
-    const [imageNewAboutMe, setImageNewAboutMe] = useState("");
-  const { token } = useTokenContext();
-  const newImageAbouMeRef = useRef();
+  const { token, loggedUser } = useTokenContext();
+  const [showNewAboutMe, setShowNewAboutMe] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const { setAlert } = useContext(AlertContext);
 
     return(
-        <>
+<div className="addwork">
+    {loggedUser && showNewAboutMe === false && (
+      <button
+        onClick={() => {
+          setShowNewAboutMe(true);
+        }}
+      >
+        <img src={addIcon} alt="AÑADIR" ></img>
+      </button>
+    )}
+    
+    {loggedUser && showNewAboutMe === true && (
         <form
           onSubmit={async (event) => {
             try {
               event.preventDefault();
-              const file = newImageAbouMeRef.current.files[0];
+              setLoading(true);
   
-              if (file && descriptionAboutMe) {
+              if (descriptionAboutMe) {
                     const formData = new FormData();
   
-                    formData.append("imageAboutMe", file);
                     formData.append("descriptionAboutMe", descriptionAboutMe);
   
                   const res = await fetch(
@@ -42,15 +55,16 @@ const NewAboutMeForm = ({adAboutMe}) => {
                   const newObject = {
                     descriptionaboutme: descriptionAboutMe,
                     id: body.data.newId,
-                    idUser: 1,
-                    imageaboutme: body.data.imageName,                    
+                    idUser: 1,                 
                   };
                   adAboutMe({newObject})
-                  setImageNewAboutMe("")
+                  setAlert({ type: "success", msg: body.message });
                 }
                 } catch (error) {
                   console.error(error.message);
+                  setAlert({ type: "error", msg: error.message });
                 } finally {
+                  setLoading(false);
                 }
               }}
         >
@@ -62,27 +76,19 @@ const NewAboutMeForm = ({adAboutMe}) => {
               setDescriptionAboutMe(event.target.value);
             }}
           />
-                <label htmlFor="imageNewAboutMe">
-                {!imageNewAboutMe && (
-            <Imagen image={imageNewAboutMe} title={imageNewAboutMe} />
-          )}
-          {imageNewAboutMe && (
-            <img src={imageNewAboutMe} alt={imageNewAboutMe} />
-          )}
-        </label>
-        <input
-          id="imageNewAboutMe"
-          type="file"
-          hidden
-          ref={newImageAbouMeRef}
-          onChange={() => {
-            const file = newImageAbouMeRef.current.files[0];
-            setImageNewAboutMe(URL.createObjectURL(file));
-          }}
-        />
+                <button
+                type="button"
+                onClick={() => {
+                  setShowNewAboutMe(false);
+                }}
+              >
+                Cancelar
+        </button>
           <button>Publicar trabajo</button>
         </form>
-      </>
+      )}
+      {loading && <Spinner />}
+      </div>
     );
 }
 
