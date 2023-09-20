@@ -2,12 +2,11 @@ const { unlink } = require('fs/promises');
 const path = require('path');
 const sharp = require('sharp');
 const uuid = require('uuid');
-const { spawn } = require('child_process');
-const { promisify } = require('util');
+const fs = require('fs/promises');
+const ffmpeg = require('fluent-ffmpeg');
 
 const filesDir = path.join(__dirname, 'static');
 
-const exec = promisify(spawn);
 
 function generateError(message, code) {
     const error = new Error(message);
@@ -65,28 +64,28 @@ async function saveImage(imagen) {
 async function saveVideo(video) {
     try {
         const videoName = uuid.v4() + '.mp4';
-        const videoOutputPath = path.join(filesDir, videoName);
-        const videoPath = path.join(filesDir, video.name);
+        const videoOutputDirectory = path.join(filesDir, videoName);
+        const videoDirectory = path.join(filesDir, video.name);
 
-        const ffmpegCmd = [
-            '-i', videoPath,
-            '-vf', 'scale=1200:1200',
-            '-c:v', 'h264',
-            '-pix_fmt', 'yuv420p',
-            '-movflags', '+faststart',
-            videoOutputPath,
-        ];
+        await fs.writeFile(videoDirectory, video.data);
 
-        const { error } = await exec('ffmpeg', ffmpegCmd);
-
-        if (error) {
-            console.error('Error al procesar el video:', error.message);
-            throw new Error('Error al procesar el video');
-        }
-
-        return videoName;
+        return new Promise((resolve, reject) => {
+            ffmpeg(videoDirectory)
+                .output(videoOutputDirectory)
+                .size('1200x?')
+                .videoCodec('libx264')
+                .audioCodec('aac')
+                .on('end', async () => {
+                    await unlink(videoDirectory);
+                    resolve(videoName);
+                })
+                .on('error', (err) => {
+                    reject(new Error('Error al procesar el video: ' + err.message));
+                })
+                .run();
+        });
     } catch (error) {
-        throw new Error('Error al procesar el video');
+        throw new Error('Error al procesar el video: ' + error.message);
     }
 }
 

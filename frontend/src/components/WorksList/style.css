@@ -17,6 +17,12 @@ max-width: 100%;
     transition-timing-function: ease-in-out;
     z-index: 1;
 }
+.worklist>li>video{
+    max-width: 100%;
+    transition-duration: 300ms;
+    transition-timing-function: ease-in-out;
+    z-index: 1;
+}
 .worklist>li>article{
     display: flex;
     flex-direction: column;
@@ -34,5 +40,8 @@ max-width: 100%;
     opacity: 1;
 }
 .worklist>li:hover>img{
+    filter: brightness(50%);
+}
+.worklist>li:hover>video{
     filter: brightness(50%);
 }

@@ -33,6 +33,7 @@ const useUser = () => {
     };
 
     fetchUser();
+
   }, []);
   return { user, setUser, loading};
 };

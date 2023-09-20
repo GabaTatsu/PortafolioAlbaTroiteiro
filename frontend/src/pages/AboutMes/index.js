@@ -21,7 +21,9 @@ const AboutMes = () => {
         ></img>
         <div>
         <aside>
-        <Imagen image={user.userimage} title={user.username}></Imagen>
+          {user.userimage &&
+                  <Imagen image={user.userimage} title={user.username}></Imagen>
+          }
         <Contact></Contact>
         </aside>      
         <AboutMeList aboutMes={aboutMes} deleteAboutMe={deleteAboutMe}/>
