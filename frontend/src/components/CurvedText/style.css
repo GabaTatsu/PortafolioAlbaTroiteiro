@@ -1,0 +1,19 @@
+.spinning-text-wrapper{
+    position: relative;
+    width: 100px;
+    display: grid;
+    place-items: center;
+}
+.spinning-text {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.spinning-text span{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.animating {
+    transition: height 2s ease;
+  }

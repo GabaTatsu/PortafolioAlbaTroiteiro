@@ -1,9 +1,7 @@
 import imageNotAvailable from "../../assets/icons/no-picture-available-icon.jpg";
 import imageNotValid from "../../assets/icons/NotValid.png";
 
-const Imagen = ({ image, title }) => {
-  const isVideos = image && /\.(mp4|avi|mov|mkv|wmv|flv|webm|mpeg|mpg)$/i.test(image);
-  const isImage = image && /\.(jpg|jpeg|png|gif|webp|tiff|tif|bmp|svg)$/i.test(image);
+const ImagePreview = ({ image, title, isVideo }) => {
 
   return (
     <>
@@ -11,11 +9,11 @@ const Imagen = ({ image, title }) => {
           src={imageNotAvailable}
           alt={title}
         />}
-        {image && !isVideos && !isImage && <img
+        {image && isVideo === "otro" && <img
           src={imageNotValid}
           alt={title}
         />}
-        {isVideos && (
+        {isVideo === "video" && (
            <video
            autoPlay
            loop
@@ -23,12 +21,12 @@ const Imagen = ({ image, title }) => {
            playsInline
            controls={false}
          >
-           <source src={`${process.env.REACT_APP_API_URL}/${image}`} type="video/mp4" />
+           <source src={image} type="video/mp4" />
          </video>
         )}
-        {isImage && (
+        {isVideo === "imagen" && (
           <img
-          src={`${process.env.REACT_APP_API_URL}/${image}`}
+          src={image}
           alt={title}
         />
         )}
@@ -36,4 +34,4 @@ const Imagen = ({ image, title }) => {
   );
 };
 
-export default Imagen;
+export default ImagePreview;

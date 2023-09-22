@@ -4,6 +4,7 @@ import { useTokenContext } from "../Contexts/TokenContext";
 import Imagen from "../Imagen";
 import { AlertContext } from "../Contexts/AlertContext";
 import Spinner from "../Spinner";
+import ImagePreview from "../ImagePreview";
 
 const EditWorkForm = ({id, deleteWork, setEditTitle, editTitle, setEditDescription, editDescription, setEditImage, editImage, setEditWorkForm, editWorkForm, category}) => {
   const { token } = useTokenContext();
@@ -14,6 +15,7 @@ const EditWorkForm = ({id, deleteWork, setEditTitle, editTitle, setEditDescripti
   const newImageRef = useRef();
   const [loading, setLoading] = useState(false);
   const { setAlert } = useContext(AlertContext);
+  const [isVideo, setIsVideo] = useState("");
 
   return (
     <div className="editform">
@@ -116,7 +118,7 @@ const EditWorkForm = ({id, deleteWork, setEditTitle, editTitle, setEditDescripti
           <Imagen image={editImage} title={editTitle} />
         )}
         {newImage && (
-          <img src={newImage} alt={title || editTitle} />
+          <ImagePreview isVideo={isVideo} image={newImage} title={title || editTitle} />
         )}
       </label>
       <input
@@ -127,6 +129,13 @@ const EditWorkForm = ({id, deleteWork, setEditTitle, editTitle, setEditDescripti
         onChange={() => {
           const file = newImageRef.current.files[0];
           setNewImage(URL.createObjectURL(file));
+          if (file && file.type && file.type.startsWith('video/')){
+            setIsVideo("video");
+          } else if (file && file.type && file.type.startsWith('image/')) {
+            setIsVideo("imagen");
+          } else {
+            setIsVideo("otro");
+          }
         }}
       />
       <button type="submit">Modificar</button>

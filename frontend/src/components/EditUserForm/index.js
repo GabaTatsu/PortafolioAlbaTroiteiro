@@ -3,6 +3,7 @@ import { useTokenContext } from "../Contexts/TokenContext";
 import Imagen from "../Imagen";
 import { AlertContext } from "../Contexts/AlertContext";
 import Spinner from "../Spinner";
+import ImagePreview from "../ImagePreview";
 
 const EditUserForm = ({ user, setUser }) => {
     const [username, setUsername] = useState("");
@@ -13,6 +14,7 @@ const EditUserForm = ({ user, setUser }) => {
     const { token } = useTokenContext();
     const [loading, setLoading] = useState(false);
     const { setAlert } = useContext(AlertContext);
+    const [isVideo, setIsVideo] = useState("");
 
     return (
       <form
@@ -101,7 +103,7 @@ const EditUserForm = ({ user, setUser }) => {
           <Imagen image={user.userimage} title={username || user.username} />
         )}
         {newUserImage && (
-          <img src={newUserImage} alt={username || user.username} />
+          <ImagePreview isVideo={isVideo} image={newUserImage} title={username || user.username} />
         )}
       </label>
       <input
@@ -112,6 +114,13 @@ const EditUserForm = ({ user, setUser }) => {
         onChange={() => {
           const file = newUserImageRef.current.files[0];
           setNewUserImage(URL.createObjectURL(file));
+          if (file && file.type && file.type.startsWith('video/')){
+            setIsVideo("video");
+          } else if (file && file.type && file.type.startsWith('image/')) {
+            setIsVideo("imagen");
+          } else {
+            setIsVideo("otro");
+          }
         }}
       />
       {loading && <Spinner />}

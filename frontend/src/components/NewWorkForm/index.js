@@ -1,10 +1,10 @@
 import { useTokenContext } from "../Contexts/TokenContext";
 import { useState, useRef, useContext } from "react";
-import Imagen from "../Imagen";
 import addIcon from "../../assets/icons/icons8-plus-144.png"
 import "./style.css";
 import Spinner from "../Spinner";
 import { AlertContext } from "../Contexts/AlertContext";
+import ImagePreview from "../ImagePreview";
 
 const NewWorkForm = ({works, adWork}) => {
   const [title, setTitle] = useState("");
@@ -16,6 +16,7 @@ const NewWorkForm = ({works, adWork}) => {
   const newImageWorkRef = useRef();
   const [loading, setLoading] = useState(false);
   const { setAlert } = useContext(AlertContext);
+  const [isVideo, setIsVideo] = useState("");
 
   return (
     <div className="addwork">
@@ -138,10 +139,10 @@ const NewWorkForm = ({works, adWork}) => {
         </article>
               <label htmlFor="imageNewWork">
               {!imageNewWork && (
-          <Imagen image={imageNewWork} title={title} />
+          <ImagePreview isVideo={isVideo} image={imageNewWork} title={title} />
         )}
         {imageNewWork && (
-          <img src={imageNewWork} alt={title} />
+          <ImagePreview isVideo={isVideo} image={imageNewWork} title={title} />
         )}
       </label>
       <input
@@ -150,8 +151,16 @@ const NewWorkForm = ({works, adWork}) => {
         hidden
         ref={newImageWorkRef}
         onChange={() => {
-          const file = newImageWorkRef.current.files[0];
-          setImageNewWork(URL.createObjectURL(file));
+          const file = newImageWorkRef.current.files[0]; 
+
+            setImageNewWork(URL.createObjectURL(file));
+            if (file && file.type && file.type.startsWith('video/')){
+              setIsVideo("video");
+            } else if (file && file.type && file.type.startsWith('image/')) {
+              setIsVideo("imagen");
+            } else {
+              setIsVideo("otro");
+            }
         }}
       />
       </form>

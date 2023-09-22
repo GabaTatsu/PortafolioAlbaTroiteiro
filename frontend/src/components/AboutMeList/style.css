@@ -7,3 +7,9 @@
     margin-bottom: 10rem;
     text-align: justify;
 }
+.aboutme>li article{
+    position: relative;
+display: flex;
+flex-direction: column;
+align-items: center;
+}

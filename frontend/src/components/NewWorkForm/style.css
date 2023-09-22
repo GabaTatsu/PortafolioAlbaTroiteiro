@@ -21,3 +21,9 @@
 .addwork>form img {
 max-width: 20rem;
 }
+.addwork>form video {
+    max-width: 20rem;
+    }
+.addwork>form article video {
+    max-width: 20rem;
+    }

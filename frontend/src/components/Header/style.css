@@ -19,19 +19,12 @@ header>aside>{
   display: flex;
   justify-content: left;
 }
-header>aside>div:nth-child(4){
+header>aside>div{
   display: flex;
-  align-items: center;
+  justify-content: left;
+  align-items:flex-start;
 }
-header>aside>div:nth-child(4) a{
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-}
-header>aside>div:nth-child(4) img{
-  height: 15px;
-}
-header>aside>div img{
+header>aside>div>img{
   width: 15px;
   transform: rotate(-90deg);
   animation: flechas 0.3s ease-in-out forwards;

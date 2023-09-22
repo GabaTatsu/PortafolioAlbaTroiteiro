@@ -1,7 +1,6 @@
 .editform {
     display: flex;
     flex-direction: column;
-    align-items: center;
     width: 60%;
 }
 .editform form{
@@ -14,7 +13,12 @@ margin-top: 1rem;
 }
 .editform img{
 max-width: 60%;
+max-height: 60%;
 }
+.editform video{
+    max-width: 60%;
+    max-height: 60%;
+    }
 .editform>form button{
     max-width: 20%;
 }

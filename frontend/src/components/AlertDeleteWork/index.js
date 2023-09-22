@@ -1,9 +1,13 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useTokenContext } from "../Contexts/TokenContext";
+import { AlertContext } from "../Contexts/AlertContext";
+import Spinner from "../Spinner";
 
 const AlertDeleteWork = ({id, title, deleteWork}) =>{
     const [alertDeleteLink, setAlertDeleteLink] = useState(false);
     const { token } = useTokenContext();
+    const { setAlert } = useContext(AlertContext);
+    const [loading, setLoading] = useState(false);
 
   return (
     <>
@@ -25,6 +29,8 @@ const AlertDeleteWork = ({id, title, deleteWork}) =>{
                   onClick={async (event) => {
                     try {
                       event.preventDefault();
+                      setLoading(true);
+
                       const res = await fetch(
                         `${process.env.REACT_APP_API_URL}/works/delete/${id}`,
                         {
@@ -41,9 +47,13 @@ const AlertDeleteWork = ({id, title, deleteWork}) =>{
                       }
                       deleteWork(id);
                       setAlertDeleteLink(false);
+                      setAlert({ type: "success", msg: body.message });
+
                     } catch (error) {
                       console.error(error.message);
+                      setAlert({ type: "error", msg: error.message });
                     } finally {
+                      setLoading(false);
                     }
                   }}
                 >
@@ -57,6 +67,7 @@ const AlertDeleteWork = ({id, title, deleteWork}) =>{
                   Cancelar
                 </button>
               </aside>
+              {loading && <Spinner />}
           </article>
       )}
     </>
