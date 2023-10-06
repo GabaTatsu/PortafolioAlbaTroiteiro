@@ -7,7 +7,6 @@ const ffmpeg = require('fluent-ffmpeg');
 
 const filesDir = path.join(__dirname, 'static');
 
-
 function generateError(message, code) {
     const error = new Error(message);
     error.httpStatus = code;
@@ -26,17 +25,15 @@ async function deleteFile(fileName) {
     }
 }
 
-async function saveFile(fileName) {
-    const fileExtension = path.extname(fileName.name).toLowerCase();
+async function saveFile(file) {
+    const fileType = file.mimetype.toLowerCase();
 
-    if (['.jpg', '.jpeg', '.png', '.gif', '.webp', '.tiff', '.tif', '.bmp', '.svg'].includes(fileExtension)) {
-
-        return saveImage(fileName);
-    } else if (['.mp4', '.avi', '.mov', '.mkv', '.wmv', '.flv', '.webm', '.mpeg', '.mpg'].includes(fileExtension)) {
-
-        return saveVideo(fileName);
+    if (fileType.startsWith('image/')) {
+        return saveImage(file);
+    } else if (fileType.startsWith('video/')) {
+        return saveVideo(file);
     } else {
-        throw new Error('Formato de archivo no admitido');
+        throw new Error('Tipo de archivo no admitido');
     }
 }
 
@@ -80,7 +77,9 @@ async function saveVideo(video) {
                     resolve(videoName);
                 })
                 .on('error', (err) => {
-                    reject(new Error('Error al procesar el video: ' + err.message));
+                    reject(
+                        new Error('Error al procesar el video: ' + err.message)
+                    );
                 })
                 .run();
         });

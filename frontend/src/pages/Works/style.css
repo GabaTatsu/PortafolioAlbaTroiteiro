@@ -1,0 +1,17 @@
+.circo {
+    display: flex;
+    justify-content: center;
+}
+.circo img {
+    width: 35%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.otros {
+    display: flex;
+    justify-content: center;
+}
+.otros img {
+    width: 54%;
+}

@@ -1,0 +1,11 @@
+.contacto {
+    display: flex;
+}
+.rotate-paragraph {
+    transition: transform 1s;
+    transform-origin: left bottom;
+}
+
+.rotate {
+    transform: rotate(15deg);
+}

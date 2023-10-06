@@ -1,146 +1,146 @@
-main{
-  margin-left: 7.3rem;
-  margin-right: 3.3rem;
-  z-index: 5;
-  display: flex;
-  flex-direction:column;
-  align-items: center;
+main {
+    margin-left: 7.3rem;
+    margin-right: 3.3rem;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-main>img{
-  max-width: 10%;
+main > img {
+    max-width: 10%;
 }
-main>div>aside>video{
-  max-width: 40%;
-  max-height: 40%;
+main > div > aside > video {
+    max-width: 40%;
+    max-height: 40%;
 }
-main>div {
-  display: flex;
+main > div {
+    display: flex;
 }
-main>div>aside {
-  position: fixed;
-  left: 28%;
-  top: 55%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+main > div > aside {
+    position: fixed;
+    left: 28%;
+    top: 55%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-main>div>aside>img{
-  max-width: 40%;
-  max-height: 40%;
+main > div > aside > img {
+    max-width: 40%;
+    max-height: 40%;
 }
-main>div>aside>article img{
-  max-width: 2rem;
+main > div > aside > article img {
+    max-width: 2rem;
 }
-main>div>aside>article>section{
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+main > div > aside > article > section {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
-main>div>aside>article>h4 {
-  margin: 1rem;
+main > div > aside > article > h4 {
+    margin: 1rem;
 }
-main>div>aside>article a {
-  text-decoration: none;
-  color: black;
+main > div > aside > article a {
+    text-decoration: none;
+    color: black;
 }
-.title{
-display: flex;
-flex-direction: column;
-gap: 2rem;
-right: 2.7rem;
-top: 20%;
-position: fixed;
-z-index: 4;
-}
-
-.title>h1 {
-  width: 20px;
-  word-wrap: break-word;
-  text-align: center;
-  color: brown;
+.title {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    right: 2.7rem;
+    top: 20%;
+    position: fixed;
+    z-index: 4;
 }
 
-footer{
-  height: 6rem;
-  display: flex;
-  justify-content:flex-end;
-  align-items: center;
-  padding-left: 4rem;
-  padding-right: 4rem;
-  background-color: white;
-  z-index: 8;
+.title > h1 {
+    width: 20px;
+    word-wrap: break-word;
+    text-align: center;
+    color: brown;
 }
-footer img{
-  width: 30px;
+
+footer {
+    height: 6rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    background-color: white;
+    z-index: 8;
 }
-.alertdelete{
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  z-index: 4;
-  background-color: white;
-  color: black;
-  width: 20rem;
-  align-items: center;
-  padding: 1rem;
-  gap: 0.2rem;
+footer img {
+    width: 30px;
 }
-.alertdelete p{
-  text-align:center;
+.alertdelete {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    z-index: 4;
+    background-color: white;
+    color: black;
+    width: 20rem;
+    align-items: center;
+    padding: 1rem;
+    gap: 0.2rem;
 }
-.alertdelete aside{
-  display: flex;
-  gap: 0.3rem;
-  justify-content: center;
+.alertdelete p {
+    text-align: center;
+}
+.alertdelete aside {
+    display: flex;
+    gap: 0.3rem;
+    justify-content: center;
 }
 .noButton {
-  border: none;
-  background: transparent;
+    border: none;
+    background: transparent;
 }
 .noButton:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
-.noButton div{
-  width: 2rem;
-  height: 2rem;
+.noButton div {
+    width: 2rem;
+    height: 2rem;
 }
 
 .alert {
-  position: fixed;
-  left: 50vw;
-  bottom: 3rem;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  padding: 1rem 2rem;
-  gap: 1rem;
-  border-radius: 5px;
-  color: white;
-  font-weight: bold;
+    position: fixed;
+    left: 50vw;
+    bottom: 3rem;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    padding: 1rem 2rem;
+    gap: 1rem;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
 }
 
 .alert img {
-  width: 2rem;
-  height: 2rem;
+    width: 2rem;
+    height: 2rem;
 }
 
 .alert.success {
-  background: green;
+    background: green;
 }
 .alert.error {
-  background-color: rgb(252, 231, 231);
-  color: red;
-  box-shadow: rgb(42, 39, 39);
+    background-color: rgb(252, 231, 231);
+    color: red;
+    box-shadow: rgb(42, 39, 39);
 }
 
 @keyframes desplegar {
-  0% {
-    opacity: 0;
-    transform: translate(250px,-200px)
-  }
-  100% {
-    opacity: 1;
-    transform: translate(-20px,-200px)
-  }
+    0% {
+        opacity: 0;
+        transform: translate(250px, -200px);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-20px, -200px);
+    }
 }

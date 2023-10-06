@@ -1,42 +1,46 @@
-header{
-  position: fixed;
-  z-index: 10;
+header {
+    position: fixed;
+    z-index: 10;
 }
-header>aside {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-  float: left;
-  margin-top: 40vh;
-  margin-left: 2vh;
+header > aside {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    float: left;
+    margin-top: 40vh;
+    margin-left: 2vh;
+    width: 150px;
 }
-header>aside a{
-text-decoration: none;
-color: black;
+header > aside a {
+    text-decoration: none;
+    color: black;
 }
 
-header>aside>{
-  display: flex;
-  justify-content: left;
+header > aside > {
+    display: flex;
+    justify-content: left;
 }
-header>aside>div{
-  display: flex;
-  justify-content: left;
-  align-items:flex-start;
+header > aside > div {
+    display: flex;
+    justify-content: left;
+    align-items: center;
 }
-header>aside>div>img{
-  width: 15px;
-  transform: rotate(-90deg);
-  animation: flechas 0.3s ease-in-out forwards;
+header > aside > div > img {
+    width: 15px;
+    transform: rotate(-90deg);
+    animation: flechas 0.3s ease-in-out forwards;
 }
-header>aside>div:last-child img{
-  width: 25px;
+header > aside img {
+    width: 50%;
+}
+header > aside > div:last-child img {
+    width: 25px;
 }
 @keyframes flechas {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
