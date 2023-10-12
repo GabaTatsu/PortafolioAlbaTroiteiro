@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
 import instagramIcon from '../../assets/icons/icoinstagram.png';
-import casaTroiteiro from '../../assets/icons/logotroiteirosinletras.jpg';
 import arrowIcon from '../../assets/icons/down-arrow.png';
 import { Link, useLocation } from 'react-router-dom';
 import RotateText from '../RotateText';
+import ImageOverNavBar from '../ImageOverNavBar';
 
 const NavBar = () => {
     const location = useLocation();
     const [redirect, setRedirect] = useState('/');
     const [isRotated, setIsRotated] = useState(false);
+    const [isImageRotated, setIsImageRotated] = useState(false);
 
     const toggleRotation = () => {
         setIsRotated(false);
@@ -27,18 +28,28 @@ const NavBar = () => {
         }
     }, [location.pathname]);
 
+    const scrollToTop = () => {
+        window.scrollTo(0, 0);
+        setIsImageRotated(!isImageRotated);
+    };
+
+    const handleLinkClick = () => {
+        toggleRotation();
+        scrollToTop();
+    };
+
     return (
         <>
             <aside>
-                <Link to="/" onClick={toggleRotation}>
-                    <img src={casaTroiteiro} alt="Alba Troiteiro"></img>
+                <Link to="/" onClick={handleLinkClick}>
+                    <ImageOverNavBar isImageRotated={isImageRotated} />
                 </Link>
 
                 <div>
                     {redirect === '/' && (
                         <img src={arrowIcon} alt="TRABAJOS"></img>
                     )}
-                    <Link to="/" onClick={toggleRotation}>
+                    <Link to="/" onClick={handleLinkClick}>
                         TRABAJOS
                     </Link>
                 </div>
@@ -47,7 +58,7 @@ const NavBar = () => {
                         <img src={arrowIcon} alt="RETRATOS"></img>
                     )}
 
-                    <Link to="/Portraits" onClick={toggleRotation}>
+                    <Link to="/Portraits" onClick={handleLinkClick}>
                         RETRATOS
                     </Link>
                 </div>
@@ -56,7 +67,7 @@ const NavBar = () => {
                         <img src={arrowIcon} alt="DIBUJOS"></img>
                     )}
 
-                    <Link to="/Drawings" onClick={toggleRotation}>
+                    <Link to="/Drawings" onClick={handleLinkClick}>
                         DIBUJOS
                     </Link>
                 </div>
@@ -65,7 +76,7 @@ const NavBar = () => {
                         <img src={arrowIcon} alt="SOBRE MI"></img>
                     )}
 
-                    <Link to="/AboutMe">
+                    <Link to="/AboutMe" onClick={scrollToTop}>
                         <RotateText
                             isRotated={isRotated}
                             setIsRotated={setIsRotated}
@@ -85,4 +96,5 @@ const NavBar = () => {
         </>
     );
 };
+
 export default NavBar;

@@ -73,7 +73,6 @@ async function saveVideo(video) {
                 .videoCodec('libx264')
                 .audioCodec('aac')
                 .on('end', async () => {
-                    await unlink(videoDirectory);
                     resolve(videoName);
                 })
                 .on('error', (err) => {

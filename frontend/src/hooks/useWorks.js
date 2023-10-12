@@ -106,6 +106,12 @@ const useWorks = ({ workType }) => {
             };
         }
 
+        works.forEach((item) => {
+            if (item.orderer >= newObject.orderer) {
+                item.orderer += 1;
+            }
+        });
+
         const newUpdatedWorks = [...works, updatedObject];
         newUpdatedWorks.sort((a, b) => a.orderer - b.orderer);
         setWorks(newUpdatedWorks);

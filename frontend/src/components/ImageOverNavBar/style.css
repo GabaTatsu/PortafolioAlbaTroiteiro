@@ -1,0 +1,7 @@
+.cabeceo {
+    margin-bottom: 1rem;
+    transition: transform 2s;
+}
+.cabeceo-rotado {
+    transform: rotate(40deg);
+}
