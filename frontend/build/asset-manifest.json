@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/static/css/main.91475deb.css",
+    "main.js": "/static/js/main.d762d6f7.js",
+    "static/js/787.c7768744.chunk.js": "/static/js/787.c7768744.chunk.js",
+    "static/media/un-brindis.gif": "/static/media/un-brindis.c8258488ee61a9b2641a.gif",
+    "static/media/circo_0.gif": "/static/media/circo_0.3660de7440367273da1a.gif",
+    "static/media/ojito2.gif": "/static/media/ojito2.f18d32d5b14890199c9b.gif",
+    "static/media/logotroiteiro.jpg": "/static/media/logotroiteiro.4f282c975735694fc2ca.jpg",
+    "static/media/logotroiteirosinletras.jpg": "/static/media/logotroiteirosinletras.ff13311684032ae9be50.jpg",
+    "static/media/1384023.png": "/static/media/1384023.fdd4b7007148bcf6ce48.png",
+    "static/media/success-icon.png": "/static/media/success-icon.2b1900cafb08d36389c5.png",
+    "static/media/error.png": "/static/media/error.9b9086c7e0ce0e532a57.png",
+    "static/media/editar.png": "/static/media/editar.0f46e2728eb984e21ce8.png",
+    "index.html": "/index.html",
+    "main.91475deb.css.map": "/static/css/main.91475deb.css.map",
+    "main.d762d6f7.js.map": "/static/js/main.d762d6f7.js.map",
+    "787.c7768744.chunk.js.map": "/static/js/787.c7768744.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.91475deb.css",
+    "static/js/main.d762d6f7.js"
+  ]
+}
