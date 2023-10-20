@@ -15,3 +15,13 @@
 .otros img {
     width: 54%;
 }
+@media screen and (max-width: 800px) {
+    .circo {
+        margin-top: 1rem;
+        width: 50rem;
+    }
+    .otros {
+        margin-top: 2rem;
+        width: 50rem;
+    }
+}

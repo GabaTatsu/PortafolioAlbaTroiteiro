@@ -45,7 +45,7 @@ const NewWorkForm = ({ works, adWork }) => {
                             formData.append('title', title);
                             formData.append('description', description);
                             formData.append('category', category);
-                            formData.append('orderer', parseInt(order));
+                            formData.append('orderer', order);
 
                             const res = await fetch(
                                 `${process.env.REACT_APP_API_URL}/works/new`,

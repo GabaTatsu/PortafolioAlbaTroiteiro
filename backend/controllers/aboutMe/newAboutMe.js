@@ -8,26 +8,15 @@ const newAboutMe = async (req, res, next) => {
         connection = await getDB();
 
         const { descriptionAboutMe } = req.body;
-        const imageAboutMe = req.files?.imageAboutMe;
-
-        if (!(imageAboutMe || descriptionAboutMe)) {
-            throw generateError('No se ha introducido ningún dato', 400);
-        }
 
         if (!descriptionAboutMe) {
             throw generateError('Debes indicar una descripción', 400);
         }
-        if (!imageAboutMe) {
-            throw generateError('Debes adjuntar una imagen', 400);
-        }
-
-        let imageName;
-        imageName = await saveFile(imageAboutMe);
 
         await connection.query(
-            `INSERT INTO aboutme (imageaboutme, descriptionaboutme, idUser)
-            VALUES (?, ?, ?)`,
-            [imageName, descriptionAboutMe, 1]
+            `INSERT INTO aboutme (descriptionaboutme, idUser)
+            VALUES (?, ?)`,
+            [descriptionAboutMe, 1]
         );
 
         const [lastId] = await connection.query(
@@ -37,7 +26,7 @@ const newAboutMe = async (req, res, next) => {
         res.send({
             status: 'Ok',
             message: 'Registro sobre mi insertado con éxito!',
-            data: { imageName, newId: lastId[0].maxId},
+            data: { newId: lastId[0].maxId },
         });
     } catch (error) {
         next(error);

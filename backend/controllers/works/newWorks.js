@@ -47,9 +47,10 @@ const newWorks = async (req, res, next) => {
                 ]
             );
         } else {
+            const numberOrder = parseInt(orderer);
             await connection.query(
                 `UPDATE work SET orderer = orderer + 1 WHERE category = ? AND orderer >= ?`,
-                [category, orderer]
+                [category, numberOrder]
             );
             await connection.query(
                 `INSERT INTO work (title, description, image, orderer, category, createdAt, idUser)
@@ -58,7 +59,7 @@ const newWorks = async (req, res, next) => {
                     title,
                     description,
                     imageName,
-                    orderer,
+                    numberOrder,
                     category,
                     new Date(),
                     1,
